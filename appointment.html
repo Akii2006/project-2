@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Book Appointment | Healthcare Disease Prediction System</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f5f9ff;
+        }
+        /* Navbar */
+        
+        .navbar {
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .navbar-brand {
+            font-size: 24px;
+        }
+        /* Hero Section */
+        
+        .hero {
+            background: linear-gradient(rgba(0, 105, 255, 0.85), rgba(0, 105, 255, 0.85)), url("https://images.unsplash.com/photo-1586773860418-d37222d8fce3");
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 50px;
+            font-weight: bold;
+        }
+        /* Cards */
+        
+        .card {
+            border: none;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .section-title {
+            text-align: center;
+            color: #0066ff;
+            font-weight: bold;
+            margin-bottom: 40px;
+        }
+        /* Appointment Form */
+        
+        .form-control,
+        .form-select {
+            border-radius: 10px;
+            padding: 12px;
+        }
+        
+        .btn-book {
+            background: #0066ff;
+            color: white;
+            padding: 14px;
+            border-radius: 30px;
+            font-size: 18px;
+        }
+        
+        .btn-book:hover {
+            background: #0047b3;
+            color: white;
+        }
+        /* Doctor Cards */
+        
+        .doctor img {
+            height: 220px;
+            object-fit: cover;
+            border-radius: 20px 20px 0 0;
+        }
+        /* Services */
+        
+        .service-box {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            height: 100%;
+        }
+        
+        .service-box i {
+            font-size: 45px;
+            color: #0066ff;
+        }
+        /* Contact */
+        
+        .contact-box {
+            background: #0066ff;
+            color: white;
+            padding: 35px;
+            border-radius: 20px;
+        }
+        /* Footer */
+        
+        footer {
+            background: #002b6b;
+            color: white;
+            padding: 30px;
+        }
+    </style>
+
+
+</head>
+
+
+<body>
+
+
+    <!-- Navbar -->
+
+    <nav class="navbar navbar-expand-lg bg-white">
+
+        <div class="container">
+
+            <a class="navbar-brand text-primary fw-bold" href="#">
+
+                <i class="bi bi-heart-pulse-fill"></i> Healthcare ML
+
+            </a>
+
+
+            <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#menu">
+
+<span class="navbar-toggler-icon"></span>
+
+</button>
+
+
+            <div class="collapse navbar-collapse" id="menu">
+
+
+                <ul class="navbar-nav ms-auto">
+
+                    <li class="nav-item"><a class="nav-link" href="index.html">home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="departments.html">Departments</a></li>
+                    <li class="nav-item"><a class="nav-link" href="doctors.html">Doctors</a></li>
+                    <li class="nav-item"><a class="nav-link" href="predict.html">Disease Prediction</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="#">Appointment</a></li>
+                    <li class="nav-item"><a class="nav-link" href="admin_login.html">admin Login</a></li>
+                    <li class="nav-item"><a class="nav-link" href="patient_registration.html">patient Register</a></li </ul>
+
+
+            </div>
+
+        </div>
+
+    </nav>
+
+
+
+
+    <!-- Hero -->
+
+
+    <section class="hero">
+
+
+        <div class="container">
+
+
+            <h1>Book Your Appointment</h1>
+
+            <p class="lead">
+
+                Consult with expert doctors using our AI powered healthcare platform
+
+            </p>
+
+
+            <a href="#appointment" class="btn btn-light btn-lg rounded-pill">
+
+Book Now
+
+</a>
+
+
+        </div>
+
+
+    </section>
+
+
+
+
+    <!-- Appointment Form -->
+
+
+    <section class="container py-5" id="appointment">
+
+
+        <h2 class="section-title">
+
+            Appointment Registration
+
+        </h2>
+
+
+        <div class="card p-5">
+
+
+            <form>
+
+
+                <div class="row">
+
+
+                    <div class="col-md-6 mb-3">
+
+                        <label>Full Name</label>
+
+                        <input type="text" class="form-control" placeholder="Enter Full Name">
+
+                    </div>
+
+
+
+                    <div class="col-md-6 mb-3">
+
+                        <label>Mobile Number</label>
+
+                        <input type="tel" class="form-control" placeholder="Enter Mobile Number">
+
+                    </div>
+
+
+
+                    <div class="col-md-6 mb-3">
+
+                        <label>Email Address</label>
+
+                        <input type="email" class="form-control" placeholder="Enter Email">
+
+                    </div>
+
+
+
+                    <div class="col-md-6 mb-3">
+
+                        <label>Age</label>
+
+                        <input type="number" class="form-control" placeholder="Enter Age">
+
+                    </div>
+
+
+
+
+                    <div class="col-md-6 mb-3">
+
+                        <label>Gender</label>
+
+                        <select class="form-select">
+
+<option>Male</option>
+
+<option>Female</option>
+
+<option>Other</option>
+
+</select>
+
+                    </div>
+
+
+
+
+                    <div class="col-md-6 mb-3">
+
+                        <label>Select Department</label>
+
+                        <select class="form-select">
+
+
+<option>Cardiology</option>
+
+<option>Neurology</option>
+
+<option>Orthopedics</option>
+
+<option>Dermatology</option>
+
+<option>General Medicine</option>
+
+
+</select>
+
+                    </div>
+
+
+
+                    <div class="col-md-6 mb-3">
+
+                        <label>Select Doctor</label>
+
+                        <select class="form-select">
+
+
+<option>Dr. Rajesh Sharma</option>
+
+<option>Dr. Neha Patel</option>
+
+<option>Dr. Amit Mehta</option>
+
+<option>Dr. Riya Joshi</option>
+
+
+</select>
+
+                    </div>
+
+
+
+                    <div class="col-md-6 mb-3">
+
+                        <label>Appointment Date</label>
+
+                        <input type="date" class="form-control">
+
+                    </div>
+
+
+
+                    <div class="col-md-6 mb-3">
+
+                        <label>Appointment Time</label>
+
+                        <input type="time" class="form-control">
+
+                    </div>
+
+
+
+                    <div class="col-12 mb-3">
+
+                        <label>Health Problem</label>
+
+                        <textarea class="form-control" rows="5" placeholder="Describe your symptoms"></textarea>
+
+                    </div>
+
+
+
+                    <div class="col-12">
+
+                        <button class="btn btn-book w-100">
+
+<i class="bi bi-calendar-check"></i>
+
+Confirm Appointment
+
+</button>
+
+                    </div>
+
+
+                </div>
+
+
+            </form>
+
+
+        </div>
+
+
+    </section>
+
+
+
+
+
+    <!-- Services -->
+
+
+    <section class="container py-5">
+
+
+        <h2 class="section-title">
+
+            Our Healthcare Services
+
+        </h2>
+
+
+        <div class="row g-4">
+
+
+            <div class="col-md-4">
+
+                <div class="service-box">
+
+                    <i class="bi bi-heart-pulse"></i>
+
+                    <h4 class="mt-3">
+
+                        Heart Care
+
+                    </h4>
+
+                    <p>
+
+                        Advanced cardiac diagnosis and treatment.
+
+                    </p>
+
+
+                </div>
+
+            </div>
+
+
+
+            <div class="col-md-4">
+
+                <div class="service-box">
+
+                    <i class="bi bi-robot"></i>
+
+                    <h4 class="mt-3">
+
+                        AI Disease Prediction
+
+                    </h4>
+
+                    <p>
+
+                        Machine learning based health prediction system.
+
+                    </p>
+
+
+                </div>
+
+            </div>
+
+
+
+
+            <div class="col-md-4">
+
+                <div class="service-box">
+
+                    <i class="bi bi-hospital"></i>
+
+                    <h4 class="mt-3">
+
+                        Emergency Care
+
+                    </h4>
+
+                    <p>
+
+                        24/7 emergency medical support.
+
+                    </p>
+
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+    </section>
+
+
+
+
+
+    <!-- Doctors -->
+
+
+    <section class="container py-5">
+
+
+        <h2 class="section-title">
+
+            Our Specialist Doctors
+
+        </h2>
+
+
+        <div class="row g-4">
+
+
+            <div class="col-md-3">
+
+                <div class="card doctor">
+
+
+                    <img src="https://randomuser.me/api/portraits/men/32.jpg">
+
+
+                    <div class="card-body text-center">
+
+                        <h5>Dr. Rajesh Sharma</h5>
+
+                        <p>Cardiologist</p>
+
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+
+            <div class="col-md-3">
+
+                <div class="card doctor">
+
+
+                    <img src="https://randomuser.me/api/portraits/women/44.jpg">
+
+
+                    <div class="card-body text-center">
+
+                        <h5>Dr. Neha Patel</h5>
+
+                        <p>Neurologist</p>
+
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+
+
+            <div class="col-md-3">
+
+                <div class="card doctor">
+
+
+                    <img src="https://randomuser.me/api/portraits/men/46.jpg">
+
+
+                    <div class="card-body text-center">
+
+                        <h5>Dr. Amit Mehta</h5>
+
+                        <p>Orthopedic</p>
+
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+
+
+            <div class="col-md-3">
+
+                <div class="card doctor">
+
+
+                    <img src="https://randomuser.me/api/portraits/women/65.jpg">
+
+
+                    <div class="card-body text-center">
+
+                        <h5>Dr. Riya Joshi</h5>
+
+                        <p>Dermatologist</p>
+
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+    </section>
+
+
+
+
+
+    <!-- Contact -->
+
+
+    <section class="container py-5">
+
+
+        <div class="contact-box text-center">
+
+
+            <h2>
+
+                Need Emergency Help?
+
+            </h2>
+
+
+            <h3>
+
+                <i class="bi bi-telephone-fill"></i> +91 9876543210
+
+            </h3>
+
+
+            <p>
+
+                Available 24/7 for patient support
+
+            </p>
+
+
+        </div>
+
+
+    </section>
+
+
+
+
+
+    <!-- Footer -->
+
+
+    <footer class="text-center">
+
+
+        <h4>
+
+            Healthcare Disease Prediction System
+
+        </h4>
+
+
+        <p>
+
+            AI Powered Healthcare Solution Using Machine Learning
+
+        </p>
+
+
+        <p>
+
+            © 2026 All Rights Reserved
+
+        </p>
+
+
+    </footer>
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Admin Dashboard | Healthcare Disease Prediction System</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+
+    <style>
+        body {
+            background: #f4f7fc;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 250px;
+            height: 100vh;
+            background: #0d6efd;
+            color: white;
+            overflow-y: auto;
+        }
+        
+        .sidebar h3 {
+            text-align: center;
+            padding: 20px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, .2);
+        }
+        
+        .sidebar a {
+            display: block;
+            color: white;
+            text-decoration: none;
+            padding: 15px 20px;
+            transition: .3s;
+        }
+        
+        .sidebar a:hover {
+            background: white;
+            color: #0d6efd;
+        }
+        
+        .main-content {
+            margin-left: 250px;
+        }
+        
+        .topbar {
+            background: white;
+            padding: 15px 25px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, .1);
+        }
+        
+        .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, .08);
+        }
+        
+        .stat-card {
+            color: white;
+            border-radius: 15px;
+            padding: 25px;
+        }
+        
+        .bg1 {
+            background: #0d6efd;
+        }
+        
+        .bg2 {
+            background: #198754;
+        }
+        
+        .bg3 {
+            background: #ffc107;
+            color: black;
+        }
+        
+        .bg4 {
+            background: #dc3545;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+        <div class="container">
+
+
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="menu">
+                <ul class="navbar-nav ms-auto">
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link active" href="departments.html">Departments</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="doctors.html">Doctors</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="predict.html">Disease Prediction</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="appointment.html">Appointment</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="admin_login.html">admin login</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="patient_registration.html">patient Register</a>
+                    </li>
+
+
+                </ul>
+            </div>
+
+        </div>
+    </nav>
+
+    <!-- Sidebar -->
+
+    <div class="sidebar">
+
+        <h3>
+            <i class="bi bi-heart-pulse-fill"></i><br> Admin Dashboard
+        </h3>
+
+
+        <li class="nav-item">
+            <a class="nav-link" href="dashboard.html">hospital summary</summary></a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link" href="dashboard1.html">Patient Management</summary>
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link" href="dashboard2.html">Appointment Management</summary>
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link" href="dashboard3.html">Disease Prediction History</summary>
+            </a>
+        </li>
+
+
+        <li class="nav-item">
+            <a class="nav-link" href="dashboard4.html">Latest Notifications</summary>
+            </a>
+        </li>
+
+
+        <li class="nav-item">
+            <a class="nav-link" href="dashboard5.html">Doctor Availability</summary>
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link" href="dashboard6.html">Monthly Patient Statistics</summary>
+            </a>
+        </li>
+
+
+        <li class="nav-item">
+            <a class="nav-link" href="dashboard7.html">Disease Prediction Summary</summary>
+            </a>
+        </li>
+
+
+        <li class="nav-item">
+            <a class="nav-link" href="dashboard4.html">Latest Notifications</summary>
+            </a>
+        </li>
+
+
+        <a href="admin_login.html">
+            <i class="bi bi-box-arrow-right"></i> Logout
+        </a>
+
+    </div>
+
+    <!-- Main Content -->
+
+    <div class="main-content">
+
+        <!-- Top Navbar -->
+
+        <div class="topbar d-flex justify-content-between align-items-center">
+
+
+
+        </div>
+
+        <!-- Dashboard -->
+
+        <body>
+            <div class="container my-5">
+
+                <div class="row mt-4">
+
+                    <div class="col-lg-12">
+
+                        <div class="card shadow">
+
+                            <div class="card-header bg-dark text-white">
+                                <h5 class="mb-0">
+                                    Hospital Summary
+                                </h5>
+                            </div>
+
+                            <div class="card-body">
+
+                                <div class="row text-center">
+
+                                    <div class="col-md-3 col-sm-6 mb-4">
+                                        <h2 class="text-primary">15</h2>
+                                        <p class="fw-bold">Departments</p>
+                                    </div>
+
+                                    <div class="col-md-3 col-sm-6 mb-4">
+                                        <h2 class="text-success">42</h2>
+                                        <p class="fw-bold">Doctors</p>
+                                    </div>
+
+                                    <div class="col-md-3 col-sm-6 mb-4">
+                                        <h2 class="text-danger">125</h2>
+                                        <p class="fw-bold">Available Beds</p>
+                                    </div>
+
+                                    <div class="col-md-3 col-sm-6 mb-4">
+                                        <h2 class="text-warning">98%</h2>
+                                        <p class="fw-bold">Prediction Accuracy</p>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- Bootstrap JS -->
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+        </body>

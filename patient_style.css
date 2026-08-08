@@ -1,0 +1,189 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: #f4f9ff;
+}
+
+
+/* Header */
+
+header {
+    height: 75px;
+    background: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 8%;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.logo {
+    font-size: 25px;
+    font-weight: bold;
+    color: #0066ff;
+}
+
+nav a {
+    text-decoration: none;
+    margin-left: 25px;
+    color: #333;
+    font-weight: bold;
+}
+
+nav a:hover {
+    color: #0066ff;
+}
+
+
+/* Banner */
+
+.banner {
+    background: linear-gradient( rgba(0, 102, 255, 0.8), rgba(0, 102, 255, 0.8)), url("https://images.unsplash.com/photo-1586773860418-d37222d8fce3");
+    background-size: cover;
+    text-align: center;
+    color: white;
+    padding: 80px 20px;
+}
+
+.banner h1 {
+    font-size: 45px;
+}
+
+
+/* Registration */
+
+.registration {
+    padding: 50px 10%;
+}
+
+.register-box {
+    background: white;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+}
+
+.register-box h2 {
+    text-align: center;
+    color: #0066ff;
+    margin-bottom: 30px;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.input-box {
+    display: flex;
+    flex-direction: column;
+}
+
+.full {
+    grid-column: 1/3;
+}
+
+label {
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+input,
+select,
+textarea {
+    padding: 13px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    font-size: 15px;
+}
+
+.check {
+    margin-top: 20px;
+}
+
+button {
+    margin-top: 25px;
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: 30px;
+    background: #0066ff;
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #0047b3;
+}
+
+.login {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.login a {
+    color: #0066ff;
+}
+
+
+/* Information */
+
+.info {
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+    padding: 40px 10%;
+}
+
+.info div {
+    background: white;
+    padding: 25px;
+    text-align: center;
+    border-radius: 15px;
+    width: 30%;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+}
+
+.info h3 {
+    color: #0066ff;
+}
+
+
+/* Footer */
+
+footer {
+    background: #002b6b;
+    color: white;
+    text-align: center;
+    padding: 30px;
+}
+
+@media(max-width:768px) {
+    header {
+        flex-direction: column;
+        height: auto;
+        padding: 20px;
+    }
+    nav {
+        margin-top: 15px;
+    }
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+    .full {
+        grid-column: auto;
+    }
+    .info {
+        flex-direction: column;
+    }
+    .info div {
+        width: 100%;
+    }
+}

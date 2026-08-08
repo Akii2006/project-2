@@ -1,0 +1,455 @@
+/* ===============================
+   GLOBAL DESIGN
+================================ */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #e0f2fe, #f8fafc, #dbeafe);
+    overflow-x: hidden;
+}
+
+
+/* ===============================
+   BACKGROUND ANIMATION
+================================ */
+
+.background-animation span {
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    background: rgba(37, 99, 235, 0.12);
+    border-radius: 50%;
+    filter: blur(2px);
+    animation: floating 12s infinite ease-in-out;
+}
+
+.background-animation span:nth-child(1) {
+    top: 5%;
+    left: 10%;
+}
+
+.background-animation span:nth-child(2) {
+    top: 70%;
+    left: 80%;
+    width: 220px;
+    height: 220px;
+}
+
+.background-animation span:nth-child(3) {
+    top: 40%;
+    left: 45%;
+    width: 100px;
+    height: 100px;
+}
+
+.background-animation span:nth-child(4) {
+    top: 80%;
+    left: 20%;
+}
+
+@keyframes floating {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-80px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+
+/* ===============================
+   MAIN GLASS CONTAINER
+================================ */
+
+.glass-card {
+    background: rgba(255, 255, 255, 0.75);
+    backdrop-filter: blur(20px);
+    border-radius: 30px;
+    padding: 30px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, .12);
+    animation: fadeIn 1s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* ===============================
+   HEADER
+================================ */
+
+.page-header h2 {
+    font-size: 32px;
+    font-weight: 700;
+    color: #2563eb;
+}
+
+.page-header p {
+    color: #64748b;
+    font-size: 15px;
+}
+
+.add-btn {
+    background: linear-gradient( 45deg, #2563eb, #06b6d4);
+    border: none;
+    color: white;
+    padding: 12px 25px;
+    border-radius: 30px;
+    transition: .4s;
+}
+
+.add-btn:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 15px 30px rgba(37, 99, 235, .4);
+}
+
+
+/* ===============================
+   STATISTICS CARDS
+================================ */
+
+.stat-card {
+    border-radius: 25px;
+    padding: 25px;
+    color: white;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    position: relative;
+    overflow: hidden;
+    transition: .4s;
+}
+
+.stat-card::before {
+    content: "";
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    background: rgba(255, 255, 255, .2);
+    border-radius: 50%;
+    right: -30px;
+    top: -30px;
+}
+
+.stat-card:hover {
+    transform: translateY(-12px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, .2);
+}
+
+.stat-icon {
+    height: 70px;
+    width: 70px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    background: rgba(255, 255, 255, .25);
+}
+
+.stat-card h3 {
+    font-size: 35px;
+    font-weight: 700;
+    margin: 0;
+}
+
+.stat-card p {
+    margin: 0;
+}
+
+.blue {
+    background: linear-gradient( 135deg, #2563eb, #38bdf8);
+}
+
+.green {
+    background: linear-gradient( 135deg, #059669, #34d399);
+}
+
+.orange {
+    background: linear-gradient( 135deg, #f97316, #fb923c);
+}
+
+.red {
+    background: linear-gradient( 135deg, #dc2626, #fb7185);
+}
+
+
+/* ===============================
+ SEARCH BOX
+================================ */
+
+.search-box {
+    height: 55px;
+    background: white;
+    border-radius: 18px;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, .08);
+    transition: .3s;
+}
+
+.search-box:hover {
+    transform: translateY(-5px);
+}
+
+.search-box i {
+    font-size: 22px;
+    color: #2563eb;
+}
+
+.search-box input {
+    border: none;
+    outline: none;
+    font-size: 15px;
+}
+
+.custom-select {
+    height: 55px;
+    border-radius: 18px;
+    border: none;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, .08);
+}
+
+.search-btn {
+    height: 55px;
+    border: none;
+    border-radius: 18px;
+    background: linear-gradient( 45deg, #059669, #22c55e);
+    color: white;
+    font-weight: 600;
+    transition: .4s;
+}
+
+.search-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 15px 30px rgba(16, 185, 129, .4);
+}
+
+
+/* ===============================
+ TABLE DESIGN
+================================ */
+
+.table-section {
+    background: rgba(255, 255, 255, .65);
+    padding: 25px;
+    border-radius: 25px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, .1);
+}
+
+.table-title {
+    color: #1e40af;
+    font-weight: 700;
+}
+
+.custom-table {
+    border-collapse: separate;
+    border-spacing: 0 15px;
+}
+
+.custom-table thead th {
+    background: #2563eb;
+    color: white;
+    padding: 18px;
+    border: none;
+}
+
+.custom-table tbody tr {
+    background: white;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, .06);
+    transition: .4s;
+    animation: rowAnimation .7s;
+}
+
+@keyframes rowAnimation {
+    from {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.custom-table tbody tr:hover {
+    transform: scale(1.02);
+}
+
+.custom-table td {
+    padding: 18px;
+    border: none;
+}
+
+
+/* ===============================
+ PATIENT AVATAR
+================================ */
+
+.patient-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.patient-avatar {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    background: linear-gradient( 45deg, #2563eb, #38bdf8);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+}
+
+.purple {
+    background: linear-gradient( 45deg, #7c3aed, #c084fc);
+}
+
+.pink {
+    background: linear-gradient( 45deg, #ec4899, #fb7185);
+}
+
+.orange-avatar {
+    background: linear-gradient( 45deg, #f97316, #fbbf24);
+}
+
+.green-avatar {
+    background: linear-gradient( 45deg, #059669, #34d399);
+}
+
+
+/* ===============================
+ STATUS BADGES
+================================ */
+
+.status {
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.active {
+    background: #dcfce7;
+    color: #15803d;
+}
+
+.admitted {
+    background: #dbeafe;
+    color: #1d4ed8;
+}
+
+.recovered {
+    background: #ccfbf1;
+    color: #047857;
+}
+
+.treatment {
+    background: #fef3c7;
+    color: #b45309;
+}
+
+
+/* ===============================
+ ACTION BUTTONS
+================================ */
+
+.action-btn {
+    height: 38px;
+    width: 38px;
+    border: none;
+    border-radius: 50%;
+    color: white;
+    margin: 3px;
+    transition: .3s;
+}
+
+.action-btn:hover {
+    transform: rotate(15deg) scale(1.15);
+}
+
+.view {
+    background: #0ea5e9;
+}
+
+.edit {
+    background: #f59e0b;
+}
+
+.delete {
+    background: #ef4444;
+}
+
+
+/* ===============================
+ PAGINATION
+================================ */
+
+.pagination-box {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 25px;
+}
+
+.pagination-box button {
+    height: 40px;
+    width: 40px;
+    border: none;
+    border-radius: 50%;
+    background: white;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, .1);
+    transition: .3s;
+}
+
+.pagination-box button:hover {
+    background: #2563eb;
+    color: white;
+}
+
+.active-page {
+    background: #2563eb!important;
+    color: white;
+}
+
+
+/* ===============================
+ RESPONSIVE
+================================ */
+
+@media(max-width:768px) {
+    .page-header {
+        flex-direction: column;
+        gap: 20px;
+        align-items: flex-start;
+    }
+    .stat-card {
+        margin-bottom: 10px;
+    }
+    .custom-table {
+        font-size: 13px;
+    }
+}
