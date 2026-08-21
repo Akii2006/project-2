@@ -1,51 +1,620 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Disease Prediction | Healthcare Disease Prediction System</title>
-    <link rel="stylesheet" href="style.css">
+
+    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
 
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+
     <style>
-        body {
-            font-family: Arial, Helvetica, sans-serif;
-            background: #f5f9fc;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
+        
+        body {
+            font-family: "Poppins", sans-serif;
+            background: #f4f9fc;
+            color: #243447;
+            overflow-x: hidden;
+        }
+        /* =========================
+           NAVBAR
+        ========================= */
         
         .navbar {
-            box-shadow: 0 2px 10px rgba(0, 0, 0, .1);
+            min-height: 78px;
+            background: rgba(255, 255, 255, 0.97) !important;
+            box-shadow: 0 4px 25px rgba(15, 78, 120, 0.08);
+            position: sticky;
+            top: 0;
+            z-index: 999;
         }
+        
+        .navbar-brand {
+            font-size: 23px;
+            letter-spacing: -0.5px;
+        }
+        
+        .navbar-brand i {
+            font-size: 28px;
+            margin-right: 7px;
+        }
+        
+        .nav-link {
+            font-size: 14px;
+            font-weight: 500;
+            color: #34495e !important;
+            margin: 0 3px;
+            padding: 10px 12px !important;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link:hover,
+        .nav-link.active {
+            color: #0d6efd !important;
+            background: #edf6ff;
+        }
+        /* =========================
+           HERO / BANNER
+        ========================= */
         
         .banner {
-            background: linear-gradient(rgba(13, 110, 253, .85), rgba(13, 110, 253, .85)), url('https://images.unsplash.com/photo-1584515933487-779824d29309?auto=format&fit=crop&w=1600&q=80');
+            position: relative;
+            min-height: 410px;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            color: white;
+            background: linear-gradient(110deg, rgba(5, 47, 79, 0.96), rgba(13, 110, 253, 0.82), rgba(20, 184, 166, 0.72)), url("https://images.unsplash.com/photo-1584515933487-779824d29309?auto=format&fit=crop&w=1600&q=80");
             background-size: cover;
             background-position: center;
-            color: white;
-            padding: 80px 0;
+        }
+        
+        .banner::before {
+            content: "";
+            position: absolute;
+            width: 450px;
+            height: 450px;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            border-radius: 50%;
+            right: -120px;
+            top: -150px;
+        }
+        
+        .banner::after {
+            content: "";
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 50%;
+            left: -100px;
+            bottom: -150px;
+        }
+        
+        .banner-content {
+            position: relative;
+            z-index: 2;
+            max-width: 850px;
+            margin: auto;
+        }
+        
+        .banner-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 18px;
+            border-radius: 50px;
+            background: rgba(255, 255, 255, 0.14);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(8px);
+            font-size: 13px;
+            font-weight: 500;
+            margin-bottom: 20px;
+        }
+        
+        .banner h1 {
+            font-size: clamp(34px, 5vw, 58px);
+            font-weight: 800;
+            margin-bottom: 15px;
+            letter-spacing: -1px;
+        }
+        
+        .banner p {
+            font-size: 17px;
+            font-weight: 300;
+            max-width: 720px;
+            margin: auto;
+            line-height: 1.8;
+        }
+        /* =========================
+           SECTION
+        ========================= */
+        
+        .prediction-section {
+            padding: 75px 0;
+        }
+        
+        .section-heading {
             text-align: center;
+            margin-bottom: 45px;
         }
         
-        .card {
-            border: none;
-            border-radius: 15px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, .08);
+        .section-heading .icon {
+            width: 68px;
+            height: 68px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: auto auto 18px;
+            background: linear-gradient(135deg, #e8f4ff, #dff8f5);
+            color: #0d6efd;
+            border-radius: 18px;
+            font-size: 30px;
         }
         
-        .form-check {
+        .section-heading h2 {
+            font-size: 30px;
+            font-weight: 700;
+            color: #12344d;
             margin-bottom: 10px;
         }
         
-        .btn-primary {
-            padding: 12px;
-            font-size: 18px;
+        .section-heading p {
+            color: #718096;
+            font-size: 14px;
+        }
+        /* =========================
+           MAIN FORM CARD
+        ========================= */
+        
+        .prediction-card {
+            border: 0;
+            border-radius: 24px;
+            background: #ffffff;
+            box-shadow: 0 18px 55px rgba(31, 79, 109, 0.11);
+            overflow: hidden;
+            position: relative;
         }
         
-        .section-title {
+        .prediction-card::before {
+            content: "";
+            position: absolute;
+            height: 5px;
+            width: 100%;
+            left: 0;
+            top: 0;
+            background: linear-gradient(90deg, #0d6efd, #16b8a6, #0d6efd);
+        }
+        
+        .prediction-card-body {
+            padding: 48px;
+        }
+        
+        .symptom-heading {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 30px;
+        }
+        
+        .symptom-heading-icon {
+            width: 45px;
+            height: 45px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #eaf4ff;
             color: #0d6efd;
-            font-weight: bold;
+            font-size: 20px;
+        }
+        
+        .symptom-heading h3 {
+            margin: 0;
+            font-size: 20px;
+            font-weight: 600;
+            color: #183b56;
+        }
+        /* =========================
+           SYMPTOM BOX
+        ========================= */
+        
+        .symptom-column {
+            background: #f8fbfd;
+            border: 1px solid #e7eef4;
+            border-radius: 18px;
+            padding: 24px 20px;
+            height: 100%;
+            transition: all 0.3s ease;
+        }
+        
+        .symptom-column:hover {
+            border-color: #bcdcff;
+            box-shadow: 0 8px 25px rgba(13, 110, 253, 0.06);
+            transform: translateY(-3px);
+        }
+        
+        .column-title {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            color: #0d6efd;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 18px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #e3ebf1;
+        }
+        
+        .form-check {
+            position: relative;
+            padding: 10px 10px 10px 36px;
+            margin-bottom: 5px;
+            border-radius: 9px;
+            transition: all 0.25s ease;
+        }
+        
+        .form-check:hover {
+            background: #edf6ff;
+        }
+        
+        .form-check-input {
+            width: 18px;
+            height: 18px;
+            margin-left: -28px;
+            margin-top: 2px;
+            cursor: pointer;
+            border: 1.5px solid #b8c9d6;
+        }
+        
+        .form-check-input:checked {
+            background-color: #0d6efd;
+            border-color: #0d6efd;
+        }
+        
+        .form-check-label {
+            font-size: 14px;
+            color: #465a6b;
+            cursor: pointer;
+            font-weight: 400;
+        }
+        /* =========================
+           BUTTONS
+        ========================= */
+        
+        .prediction-buttons {
+            margin-top: 35px;
+            padding-top: 30px;
+            border-top: 1px solid #e8eef3;
+        }
+        
+        .btn-predict {
+            border: none;
+            min-width: 210px;
+            padding: 13px 25px;
+            border-radius: 10px;
+            font-weight: 600;
+            background: linear-gradient(135deg, #0d6efd, #0756c9);
+            box-shadow: 0 8px 20px rgba(13, 110, 253, 0.22);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-predict:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 28px rgba(13, 110, 253, 0.3);
+        }
+        
+        .btn-reset {
+            min-width: 130px;
+            padding: 13px 22px;
+            border-radius: 10px;
+            font-weight: 500;
+        }
+        /* =========================
+           RESULT SECTION
+        ========================= */
+        
+        .result-wrapper {
+            margin-top: 30px;
+        }
+        
+        .result-card {
+            border: 0;
+            border-radius: 24px;
+            background: white;
+            box-shadow: 0 18px 55px rgba(31, 79, 109, 0.10);
+            overflow: hidden;
+        }
+        
+        .result-header {
+            background: linear-gradient(135deg, #0d6efd, #0756c9);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .result-header h2 {
+            margin: 0;
+            font-weight: 700;
+            font-size: 27px;
+        }
+        
+        .result-header p {
+            margin: 8px 0 0;
+            opacity: 0.85;
+            font-size: 13px;
+        }
+        
+        .result-body {
+            padding: 40px;
+        }
+        
+        .success-alert {
+            border: 0;
+            border-radius: 14px;
+            background: #eafaf1;
+            color: #16834c;
+            padding: 18px;
+        }
+        
+        .success-alert h3 {
+            font-size: 18px;
+            margin: 0;
+        }
+        /* Result Information Cards */
+        
+        .result-info-card {
+            border: 1px solid #e5edf3;
+            border-radius: 16px;
+            overflow: hidden;
+            height: 100%;
+            background: white;
+            box-shadow: 0 5px 18px rgba(0, 0, 0, 0.04);
+        }
+        
+        .result-info-header {
+            padding: 13px 18px;
+            color: white;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        
+        .result-info-body {
+            padding: 22px 18px;
+        }
+        
+        .result-info-body h4,
+        .result-info-body h5 {
+            margin: 0;
+            color: #183b56;
+            font-weight: 600;
+        }
+        
+        .result-icon {
+            width: 45px;
+            height: 45px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 21px;
+            margin-bottom: 12px;
+        }
+        
+        .green-icon {
+            background: #eafaf1;
+            color: #198754;
+        }
+        
+        .blue-icon {
+            background: #eaf4ff;
+            color: #0d6efd;
+        }
+        
+        .cyan-icon {
+            background: #e8fbff;
+            color: #0dcaf0;
+        }
+        
+        .yellow-icon {
+            background: #fff8df;
+            color: #d49b00;
+        }
+        
+        .gray-icon {
+            background: #eef1f4;
+            color: #687684;
+        }
+        /* =========================
+           ADVICE
+        ========================= */
+        
+        .advice-card {
+            border: 1px solid #e5edf3;
+            border-radius: 16px;
+            overflow: hidden;
+            margin-top: 22px;
+        }
+        
+        .advice-header {
+            background: #566573;
+            color: white;
+            padding: 14px 20px;
+            font-weight: 600;
+        }
+        
+        .advice-body {
+            padding: 25px;
+        }
+        
+        .advice-body ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+        
+        .advice-body li {
+            padding: 5px 0;
+            color: #536575;
+            font-size: 14px;
+        }
+        /* =========================
+           DISCLAIMER
+        ========================= */
+        
+        .disclaimer {
+            border: 0;
+            border-left: 5px solid #ffc107;
+            border-radius: 12px;
+            background: #fffaf0;
+            box-shadow: 0 8px 25px rgba(184, 134, 11, 0.05);
+            padding: 22px 25px;
+        }
+        
+        .disclaimer h5 {
+            color: #8a6500;
+            font-weight: 700;
+        }
+        
+        .disclaimer p {
+            color: #6d6250;
+            margin: 0;
+            font-size: 14px;
+            line-height: 1.7;
+        }
+        /* =========================
+           FOOTER
+        ========================= */
+        
+        .hospital-footer {
+            background: #092c45;
+            color: white;
+            padding: 55px 0 20px;
+            margin-top: 30px;
+        }
+        
+        .footer-logo {
+            font-size: 23px;
+            font-weight: 700;
+        }
+        
+        .footer-logo i {
+            color: #36c6ba;
+            margin-right: 7px;
+        }
+        
+        .footer-description {
+            color: #b9cad7;
+            font-size: 14px;
+            line-height: 1.8;
+            max-width: 450px;
+            margin-top: 15px;
+        }
+        
+        .footer-contact {
+            color: #d5e0e8;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+        
+        .footer-contact i {
+            color: #36c6ba;
+            width: 25px;
+        }
+        
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.12);
+            margin-top: 35px;
+            padding-top: 18px;
+            text-align: center;
+            color: #aebeca;
+            font-size: 13px;
+        }
+        /* =========================
+           ANIMATIONS
+        ========================= */
+        
+        .fade-up {
+            animation: fadeUp 0.8s ease both;
+        }
+        
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(25px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        /* =========================
+           RESPONSIVE
+        ========================= */
+        
+        @media (max-width: 991px) {
+            .navbar {
+                min-height: 70px;
+            }
+            .nav-link {
+                margin-top: 3px;
+            }
+            .banner {
+                min-height: 350px;
+            }
+            .prediction-card-body,
+            .result-body {
+                padding: 28px;
+            }
+        }
+        
+        @media (max-width: 767px) {
+            .banner {
+                min-height: 330px;
+                padding: 60px 15px;
+            }
+            .banner h1 {
+                font-size: 35px;
+            }
+            .banner p {
+                font-size: 14px;
+            }
+            .prediction-section {
+                padding: 50px 0;
+            }
+            .prediction-card-body,
+            .result-body {
+                padding: 20px;
+            }
+            .symptom-column {
+                margin-bottom: 15px;
+            }
+            .prediction-buttons .btn {
+                width: 100%;
+                margin: 5px 0 !important;
+            }
+            .section-heading h2 {
+                font-size: 25px;
+            }
         }
     </style>
 
@@ -53,9 +622,9 @@
 
 <body>
 
-    <!-- Navbar -->
+    <!-- ========================= NAVBAR ========================= -->
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-white">
+    <nav class="navbar navbar-expand-lg navbar-light">
 
         <div class="container">
 
@@ -63,23 +632,51 @@
                 <i class="bi bi-heart-pulse-fill"></i> Healthcare ML
             </a>
 
-            <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#menu">
-<span class="navbar-toggler-icon"></span>
-</button>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu">
+
+                <span class="navbar-toggler-icon"></span>
+
+            </button>
 
             <div class="collapse navbar-collapse" id="menu">
 
                 <ul class="navbar-nav ms-auto">
 
-                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
-                    <li class="nav-item"><a class="nav-link" href="departments.html">Departments</a></li>
-                    <li class="nav-item"><a class="nav-link" href="doctors.html">Doctors</a></li>
-                    <li class="nav-item"><a class="nav-link active" href="predict.html">Disease Prediction</a></li>
-                    <li class="nav-item"><a class="nav-link" href="appointment.html">Appointment</a></li>
-                    <li class="nav-item"><a class="nav-link" href="admin_login.html">admin Login</a></li>
-                    <li class="nav-item"><a class="nav-link" href="patient_registration.html">patient Register</a></li>
-                    <li class="nav-item"><a class="nav-link" href="result.html">result</a></li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="departments.html">Departments</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="doctors.html">Doctors</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link active" href="predict.html">Disease Prediction</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="appointment.html">Appointment</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="admin_login.html">admin Login</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="patient_registration.html">patient Register</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="result.html">result</a>
+                    </li>
 
                 </ul>
 
@@ -89,250 +686,473 @@
 
     </nav>
 
-    <!-- Banner -->
+
+    <!-- ========================= BANNER ========================= -->
 
     <section class="banner">
 
-        <div class="container">
+        <div class="container banner-content text-center fade-up">
+
+            <div class="banner-badge">
+
+                <i class="bi bi-shield-check"></i> AI Powered Healthcare
+
+            </div>
 
             <h1>AI Disease Prediction</h1>
 
             <p class="lead">
+
                 Select your symptoms and let our Machine Learning model predict the possible disease.
+
             </p>
 
         </div>
 
     </section>
 
-    <!-- Prediction Form -->
 
-    <section class="container py-5">
+    <!-- ========================= PREDICTION FORM ========================= -->
 
-        <div class="card">
+    <section class="prediction-section">
 
-            <div class="card-body p-5">
+        <div class="container">
 
-                <h2 class="text-center section-title mb-4">
-                    Select Your Symptoms
-                </h2>
+            <div class="section-heading fade-up">
 
-                <form action="/predict" method="POST">
+                <div class="icon">
 
-                    <div class="row">
+                    <i class="bi bi-clipboard2-pulse-fill"></i>
 
-                        <div class="col-md-4">
+                </div>
 
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="symptoms" value="Fever">
-                                <label class="form-check-label">Fever</label>
-                            </div>
+                <h2>Select Your Symptoms</h2>
 
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="symptoms" value="Headache">
-                                <label class="form-check-label">Headache</label>
-                            </div>
+                <p>
+                    Select the symptoms you are experiencing for AI-based prediction.
+                </p>
 
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="symptoms" value="Cough">
-                                <label class="form-check-label">Cough</label>
-                            </div>
+            </div>
 
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="symptoms" value="Cold">
-                                <label class="form-check-label">Cold</label>
-                            </div>
 
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="symptoms" value="Vomiting">
-                                <label class="form-check-label">Vomiting</label>
-                            </div>
+            <div class="prediction-card fade-up">
 
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="symptoms" value="Nausea">
-                                <label class="form-check-label">Nausea</label>
-                            </div>
+                <div class="prediction-card-body">
 
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="symptoms" value="Fatigue">
-                                <label class="form-check-label">Fatigue</label>
-                            </div>
+                    <div class="symptom-heading">
 
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="symptoms" value="Body Pain">
-                                <label class="form-check-label">Body Pain</label>
-                            </div>
+                        <div class="symptom-heading-icon">
 
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="symptoms" value="Joint Pain">
-                                <label class="form-check-label">Joint Pain</label>
-                            </div>
-
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="symptoms" value="Chest Pain">
-                                <label class="form-check-label">Chest Pain</label>
-                            </div>
+                            <i class="bi bi-list-check"></i>
 
                         </div>
 
-                        <div class="col-md-4">
-
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="Shortness of Breath">
-                                <label class="form-check-label">Shortness of Breath</label>
-                            </div>
-
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="Dizziness">
-                                <label class="form-check-label">Dizziness</label>
-                            </div>
-
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="Skin Rash">
-                                <label class="form-check-label">Skin Rash</label>
-                            </div>
-
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="Itching">
-                                <label class="form-check-label">Itching</label>
-                            </div>
-
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="Diarrhea">
-                                <label class="form-check-label">Diarrhea</label>
-                            </div>
-
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="Constipation">
-                                <label class="form-check-label">Constipation</label>
-                            </div>
-
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="Loss of Appetite">
-                                <label class="form-check-label">Loss of Appetite</label>
-                            </div>
-
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="Weight Loss">
-                                <label class="form-check-label">Weight Loss</label>
-                            </div>
-
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="Blurred Vision">
-                                <label class="form-check-label">Blurred Vision</label>
-                            </div>
-
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="High Blood Pressure">
-                                <label class="form-check-label">High Blood Pressure</label>
-                            </div>
-
-                        </div>
-
-                        <div class="col-md-4">
-
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="Low Blood Pressure">
-                                <label class="form-check-label">Low Blood Pressure</label>
-                            </div>
-
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="Abdominal Pain">
-                                <label class="form-check-label">Abdominal Pain</label>
-                            </div>
-
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="Frequent Urination">
-                                <label class="form-check-label">Frequent Urination</label>
-                            </div>
-
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="Excessive Thirst">
-                                <label class="form-check-label">Excessive Thirst</label>
-                            </div>
-
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="Sneezing">
-                                <label class="form-check-label">Sneezing</label>
-                            </div>
-
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="Sore Throat">
-                                <label class="form-check-label">Sore Throat</label>
-                            </div>
-
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="Back Pain">
-                                <label class="form-check-label">Back Pain</label>
-                            </div>
-
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="Muscle Pain">
-                                <label class="form-check-label">Muscle Pain</label>
-                            </div>
-
-                        </div>
+                        <h3>Patient Symptoms</h3>
 
                     </div>
 
-                    <div class="text-center mt-4">
 
-                        <button type="submit" class="btn btn-primary btn-lg">
-<i class="bi bi-cpu-fill"></i> Predict Disease
-</button>
+                    <form action="/predict" method="POST">
 
-                        <button type="reset" class="btn btn-secondary btn-lg ms-2">
-Reset
-</button>
+                        <div class="row g-4">
 
-                    </div>
 
-                </form>
+                            <!-- ================= COLUMN 1 ================= -->
+
+                            <div class="col-lg-4">
+
+                                <div class="symptom-column">
+
+                                    <div class="column-title">
+
+                                        <i class="bi bi-activity"></i> Common Symptoms
+
+                                    </div>
+
+
+                                    <div class="form-check">
+
+                                        <input class="form-check-input" type="checkbox" name="symptoms" value="Fever">
+
+                                        <label class="form-check-label">Fever</label>
+
+                                    </div>
+
+
+                                    <div class="form-check">
+
+                                        <input class="form-check-input" type="checkbox" name="symptoms" value="Headache">
+
+                                        <label class="form-check-label">Headache</label>
+
+                                    </div>
+
+
+                                    <div class="form-check">
+
+                                        <input class="form-check-input" type="checkbox" name="symptoms" value="Cough">
+
+                                        <label class="form-check-label">Cough</label>
+
+                                    </div>
+
+
+                                    <div class="form-check">
+
+                                        <input class="form-check-input" type="checkbox" name="symptoms" value="Cold">
+
+                                        <label class="form-check-label">Cold</label>
+
+                                    </div>
+
+
+                                    <div class="form-check">
+
+                                        <input class="form-check-input" type="checkbox" name="symptoms" value="Vomiting">
+
+                                        <label class="form-check-label">Vomiting</label>
+
+                                    </div>
+
+
+                                    <div class="form-check">
+
+                                        <input class="form-check-input" type="checkbox" name="symptoms" value="Nausea">
+
+                                        <label class="form-check-label">Nausea</label>
+
+                                    </div>
+
+
+                                    <div class="form-check">
+
+                                        <input class="form-check-input" type="checkbox" name="symptoms" value="Fatigue">
+
+                                        <label class="form-check-label">Fatigue</label>
+
+                                    </div>
+
+
+                                    <div class="form-check">
+
+                                        <input class="form-check-input" type="checkbox" name="symptoms" value="Body Pain">
+
+                                        <label class="form-check-label">Body Pain</label>
+
+                                    </div>
+
+
+                                    <div class="form-check">
+
+                                        <input class="form-check-input" type="checkbox" name="symptoms" value="Joint Pain">
+
+                                        <label class="form-check-label">Joint Pain</label>
+
+                                    </div>
+
+
+                                    <div class="form-check">
+
+                                        <input class="form-check-input" type="checkbox" name="symptoms" value="Chest Pain">
+
+                                        <label class="form-check-label">Chest Pain</label>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- ================= COLUMN 2 ================= -->
+
+                            <div class="col-lg-4">
+
+                                <div class="symptom-column">
+
+                                    <div class="column-title">
+
+                                        <i class="bi bi-heart-pulse"></i> Physical Symptoms
+
+                                    </div>
+
+
+                                    <div class="form-check">
+
+                                        <input class="form-check-input" type="checkbox" name="symptoms" value="Shortness of Breath">
+
+                                        <label class="form-check-label">Shortness of Breath</label>
+
+                                    </div>
+
+
+                                    <div class="form-check">
+
+                                        <input class="form-check-input" type="checkbox" name="symptoms" value="Dizziness">
+
+                                        <label class="form-check-label">Dizziness</label>
+
+                                    </div>
+
+
+                                    <div class="form-check">
+
+                                        <input class="form-check-input" type="checkbox" name="symptoms" value="Skin Rash">
+
+                                        <label class="form-check-label">Skin Rash</label>
+
+                                    </div>
+
+
+                                    <div class="form-check">
+
+                                        <input class="form-check-input" type="checkbox" name="symptoms" value="Itching">
+
+                                        <label class="form-check-label">Itching</label>
+
+                                    </div>
+
+
+                                    <div class="form-check">
+
+                                        <input class="form-check-input" type="checkbox" name="symptoms" value="Diarrhea">
+
+                                        <label class="form-check-label">Diarrhea</label>
+
+                                    </div>
+
+
+                                    <div class="form-check">
+
+                                        <input class="form-check-input" type="checkbox" name="symptoms" value="Constipation">
+
+                                        <label class="form-check-label">Constipation</label>
+
+                                    </div>
+
+
+                                    <div class="form-check">
+
+                                        <input class="form-check-input" type="checkbox" name="symptoms" value="Loss of Appetite">
+
+                                        <label class="form-check-label">Loss of Appetite</label>
+
+                                    </div>
+
+
+                                    <div class="form-check">
+
+                                        <input class="form-check-input" type="checkbox" name="symptoms" value="Weight Loss">
+
+                                        <label class="form-check-label">Weight Loss</label>
+
+                                    </div>
+
+
+                                    <div class="form-check">
+
+                                        <input class="form-check-input" type="checkbox" name="symptoms" value="Blurred Vision">
+
+                                        <label class="form-check-label">Blurred Vision</label>
+
+                                    </div>
+
+
+                                    <div class="form-check">
+
+                                        <input class="form-check-input" type="checkbox" name="symptoms" value="High Blood Pressure">
+
+                                        <label class="form-check-label">High Blood Pressure</label>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- ================= COLUMN 3 ================= -->
+
+                            <div class="col-lg-4">
+
+                                <div class="symptom-column">
+
+                                    <div class="column-title">
+
+                                        <i class="bi bi-file-medical"></i> Additional Symptoms
+
+                                    </div>
+
+
+                                    <div class="form-check">
+
+                                        <input class="form-check-input" type="checkbox" name="symptoms" value="Low Blood Pressure">
+
+                                        <label class="form-check-label">Low Blood Pressure</label>
+
+                                    </div>
+
+
+                                    <div class="form-check">
+
+                                        <input class="form-check-input" type="checkbox" name="symptoms" value="Abdominal Pain">
+
+                                        <label class="form-check-label">Abdominal Pain</label>
+
+                                    </div>
+
+
+                                    <div class="form-check">
+
+                                        <input class="form-check-input" type="checkbox" name="symptoms" value="Frequent Urination">
+
+                                        <label class="form-check-label">Frequent Urination</label>
+
+                                    </div>
+
+
+                                    <div class="form-check">
+
+                                        <input class="form-check-input" type="checkbox" name="symptoms" value="Excessive Thirst">
+
+                                        <label class="form-check-label">Excessive Thirst</label>
+
+                                    </div>
+
+
+                                    <div class="form-check">
+
+                                        <input class="form-check-input" type="checkbox" name="symptoms" value="Sneezing">
+
+                                        <label class="form-check-label">Sneezing</label>
+
+                                    </div>
+
+
+                                    <div class="form-check">
+
+                                        <input class="form-check-input" type="checkbox" name="symptoms" value="Sore Throat">
+
+                                        <label class="form-check-label">Sore Throat</label>
+
+                                    </div>
+
+
+                                    <div class="form-check">
+
+                                        <input class="form-check-input" type="checkbox" name="symptoms" value="Back Pain">
+
+                                        <label class="form-check-label">Back Pain</label>
+
+                                    </div>
+
+
+                                    <div class="form-check">
+
+                                        <input class="form-check-input" type="checkbox" name="symptoms" value="Muscle Pain">
+
+                                        <label class="form-check-label">Muscle Pain</label>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- ================= BUTTONS ================= -->
+
+                        <div class="prediction-buttons text-center">
+
+                            <button type="submit" class="btn btn-primary btn-lg btn-predict">
+
+                                <i class="bi bi-cpu-fill"></i>
+
+                                Predict Disease
+
+                            </button>
+
+
+                            <button type="reset" class="btn btn-outline-secondary btn-lg btn-reset ms-2">
+
+                                Reset
+
+                            </button>
+
+                        </div>
+
+                    </form>
+
+                </div>
 
             </div>
 
         </div>
 
     </section>
-    <!-- Prediction Result Section -->
 
-    <section class="container mb-5">
 
-        <div class="card">
+    <!-- ========================= PREDICTION RESULT ========================= -->
 
-            <div class="card-body p-5">
+    <section class="container mb-5 result-wrapper">
 
-                <h2 class="text-center text-primary mb-4">
-                    Prediction Result
-                </h2>
+        <div class="result-card">
 
-                <!-- Hidden until prediction -->
+            <div class="result-header">
+
+                <i class="bi bi-clipboard2-check-fill fs-2"></i>
+
+                <h2>Prediction Result</h2>
+
+                <p>AI-generated healthcare prediction information</p>
+
+            </div>
+
+
+            <div class="result-body">
+
                 <div id="resultSection" style="display:none;">
 
-                    <div class="alert alert-success text-center">
+                    <div class="success-alert text-center mb-4">
 
                         <h3>
+
                             <i class="bi bi-check-circle-fill"></i> Prediction Completed Successfully
+
                         </h3>
 
                     </div>
 
-                    <div class="row">
+
+                    <div class="row g-4">
+
+
+                        <!-- Predicted Disease -->
 
                         <div class="col-md-6">
 
-                            <div class="card border-success mb-3">
+                            <div class="result-info-card">
 
-                                <div class="card-header bg-success text-white">
+                                <div class="result-info-header bg-success">
 
                                     Predicted Disease
 
                                 </div>
 
-                                <div class="card-body">
+                                <div class="result-info-body">
+
+                                    <div class="result-icon green-icon">
+
+                                        <i class="bi bi-virus"></i>
+
+                                    </div>
 
                                     <h4 id="diseaseName">
+
                                         Dengue Fever
+
                                     </h4>
 
                                 </div>
@@ -341,21 +1161,104 @@ Reset
 
                         </div>
 
+
+                        <!-- Confidence -->
+
                         <div class="col-md-6">
 
-                            <div class="card border-primary mb-3">
+                            <div class="result-info-card">
 
-                                <div class="card-header bg-primary text-white">
+                                <div class="result-info-header bg-primary">
 
                                     Prediction Confidence
 
                                 </div>
 
-                                <div class="card-body">
+                                <div class="result-info-body">
+
+                                    <div class="result-icon blue-icon">
+
+                                        <i class="bi bi-graph-up-arrow"></i>
+
+                                    </div>
 
                                     <h4 id="confidence">
+
                                         98%
+
                                     </h4>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- Recommended Department -->
+
+                        <div class="col-12">
+
+                            <div class="result-info-card">
+
+                                <div class="result-info-header bg-info">
+
+                                    Recommended Department
+
+                                </div>
+
+                                <div class="result-info-body">
+
+                                    <div class="result-icon cyan-icon">
+
+                                        <i class="bi bi-hospital-fill"></i>
+
+                                    </div>
+
+                                    <h5 id="department">
+
+                                        General Medicine
+
+                                    </h5>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- Suggested Doctor -->
+
+                        <div class="col-12">
+
+                            <div class="result-info-card">
+
+                                <div class="result-info-header bg-warning">
+
+                                    Suggested Doctor
+
+                                </div>
+
+                                <div class="result-info-body">
+
+                                    <div class="result-icon yellow-icon">
+
+                                        <i class="bi bi-person-badge-fill"></i>
+
+                                    </div>
+
+                                    <h5>
+
+                                        Dr. Rajesh Sharma
+
+                                    </h5>
+
+                                    <p class="mt-2 mb-0 text-muted">
+
+                                        Specialist in General Medicine
+
+                                    </p>
 
                                 </div>
 
@@ -365,67 +1268,18 @@ Reset
 
                     </div>
 
-                    <!-- Recommended Department -->
-
-                    <div class="card border-info mb-3">
-
-                        <div class="card-header bg-info text-white">
-
-                            Recommended Department
-
-                        </div>
-
-                        <div class="card-body">
-
-                            <h5 id="department">
-
-                                General Medicine
-
-                            </h5>
-
-                        </div>
-
-                    </div>
-
-                    <!-- Suggested Doctor -->
-
-                    <div class="card border-warning mb-3">
-
-                        <div class="card-header bg-warning">
-
-                            Suggested Doctor
-
-                        </div>
-
-                        <div class="card-body">
-
-                            <h5>
-
-                                Dr. Rajesh Sharma
-
-                            </h5>
-
-                            <p>
-
-                                Specialist in General Medicine
-
-                            </p>
-
-                        </div>
-
-                    </div>
 
                     <!-- Health Advice -->
 
-                    <div class="card border-secondary">
+                    <div class="advice-card">
 
-                        <div class="card-header bg-secondary text-white">
+                        <div class="advice-header">
 
                             Health Advice
 
                         </div>
 
-                        <div class="card-body">
+                        <div class="advice-body">
 
                             <ul>
 
@@ -455,11 +1309,12 @@ Reset
 
     </section>
 
-    <!-- Disclaimer -->
+
+    <!-- ========================= DISCLAIMER ========================= -->
 
     <section class="container mb-5">
 
-        <div class="alert alert-warning">
+        <div class="disclaimer">
 
             <h5>
 
@@ -477,45 +1332,70 @@ Reset
 
     </section>
 
-    <!-- Footer -->
 
-    <footer class="bg-primary text-white text-center p-4">
+    <!-- ========================= FOOTER ========================= -->
 
-        <h4>
+    <footer class="hospital-footer">
 
-            Healthcare Disease Prediction System
+        <div class="container">
 
-        </h4>
+            <div class="row align-items-center g-4">
 
-        <p>
+                <div class="col-lg-7">
 
-            AI Powered Healthcare Solution using Machine Learning
+                    <div class="footer-logo">
 
-        </p>
+                        <i class="bi bi-heart-pulse-fill"></i> Healthcare Disease Prediction System
 
-        <p>
+                    </div>
 
-            Email : info@healthcareml.com
+                    <p class="footer-description">
 
-        </p>
+                        AI Powered Healthcare Solution using Machine Learning
 
-        <p>
+                    </p>
 
-            Phone : +91 9876543210
+                </div>
 
-        </p>
 
-        <p>
+                <div class="col-lg-5">
 
-            © 2026 Healthcare ML. All Rights Reserved.
+                    <p class="footer-contact">
 
-        </p>
+                        <i class="bi bi-envelope-fill"></i> Email : info@healthcareml.com
+
+                    </p>
+
+                    <p class="footer-contact">
+
+                        <i class="bi bi-telephone-fill"></i> Phone : +91 9876543210
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="footer-bottom">
+
+                <p class="mb-0">
+
+                    © 2026 Healthcare ML. All Rights Reserved.
+
+                </p>
+
+            </div>
+
+        </div>
 
     </footer>
 
-    <!-- Bootstrap -->
+
+    <!-- Bootstrap JS -->
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
 
     <script>
         // Demo only
@@ -539,17 +1419,4 @@ Reset
 </body>
 
 </html>
-<form action="{{ url_for('predict') }}" method="POST"></form>
-<div class="mb-3">
-
-    <label>Fever</label>
-
-    <select class="form-select" name="fever">
-
-<option value="0">No</option>
-
-<option value="1">Yes</option>
-
-</select>
-
-</div>
+```
