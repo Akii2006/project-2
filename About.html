@@ -1,186 +1,1263 @@
 <!DOCTYPE html>
+
 <html lang="en">
 
 <head>
+
+    ```
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Us | Healthcare Disease Prediction System</title>
 
-    <!-- Bootstrap CSS -->
+    <title>About Us | Healthcare ML</title>
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
 
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="style.css">
+    <style>
+        /* =====================================================
+       GLOBAL
+    ===================================================== */
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #f6fbff;
+            color: #26384a;
+            overflow-x: hidden;
+        }
+        
+        a {
+            text-decoration: none;
+        }
+        
+        .section-padding {
+            padding: 90px 0;
+        }
+        
+        .section-heading {
+            text-align: center;
+            margin-bottom: 55px;
+        }
+        
+        .section-heading .mini-title {
+            color: #0784e8;
+            font-size: 13px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .section-heading h2 {
+            color: #123c5a;
+            font-size: 36px;
+            font-weight: 700;
+            margin-top: 8px;
+        }
+        
+        .section-heading p {
+            max-width: 700px;
+            margin: 15px auto 0;
+            color: #718397;
+            line-height: 1.8;
+        }
+        /* =====================================================
+       TOP INFORMATION BAR
+    ===================================================== */
+        
+        .top-bar {
+            background: #063b63;
+            color: white;
+            font-size: 13px;
+            padding: 9px 0;
+        }
+        
+        .top-bar i {
+            color: #42c7f5;
+            margin-right: 5px;
+        }
+        
+        .top-contact {
+            display: flex;
+            justify-content: flex-end;
+            gap: 25px;
+        }
+        /* =====================================================
+       NAVBAR
+    ===================================================== */
+        
+        .navbar {
+            background: rgba(255, 255, 255, 0.97) !important;
+            box-shadow: 0 4px 25px rgba(0, 60, 100, 0.08);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 999;
+            backdrop-filter: blur(15px);
+        }
+        
+        .navbar-brand {
+            color: #087fe5 !important;
+            font-size: 24px;
+            font-weight: 800;
+        }
+        
+        .navbar-brand i {
+            font-size: 28px;
+            margin-right: 6px;
+        }
+        
+        .brand-text span {
+            color: #123c5a;
+        }
+        
+        .nav-link {
+            color: #40566a !important;
+            font-size: 14px;
+            font-weight: 500;
+            margin: 0 3px;
+            padding: 10px 12px !important;
+            border-radius: 8px;
+            transition: 0.3s;
+        }
+        
+        .nav-link:hover,
+        .nav-link.active {
+            color: #087fe5 !important;
+            background: #edf8ff;
+        }
+        
+        .nav-special {
+            background: #087fe5;
+            color: white !important;
+            border-radius: 8px;
+            margin-left: 5px;
+        }
+        
+        .nav-special:hover {
+            background: #0568bb;
+            color: white !important;
+        }
+        /* =====================================================
+       HERO
+    ===================================================== */
+        
+        .hero {
+            min-height: 480px;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient( 90deg, rgba(2, 63, 105, 0.94), rgba(0, 139, 203, 0.76)), url("https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1800&q=85");
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .hero::before {
+            content: "";
+            position: absolute;
+            width: 450px;
+            height: 450px;
+            border: 70px solid rgba(255, 255, 255, 0.06);
+            border-radius: 50%;
+            right: -170px;
+            top: -180px;
+        }
+        
+        .hero::after {
+            content: "";
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            border: 50px solid rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+            left: -130px;
+            bottom: -180px;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            color: white;
+        }
+        
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.13);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            padding: 9px 17px;
+            border-radius: 50px;
+            font-size: 13px;
+            margin-bottom: 20px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .hero-badge i {
+            color: #4ee0ff;
+        }
+        
+        .hero h1 {
+            font-size: 52px;
+            line-height: 1.2;
+            font-weight: 800;
+            margin-bottom: 20px;
+        }
+        
+        .hero h1 span {
+            color: #54ddff;
+        }
+        
+        .hero p {
+            max-width: 680px;
+            font-size: 17px;
+            line-height: 1.8;
+            color: rgba(255, 255, 255, 0.91);
+        }
+        
+        .hero-buttons {
+            margin-top: 30px;
+        }
+        
+        .btn-primary-custom {
+            background: #ffffff;
+            color: #087fe5;
+            border: none;
+            padding: 13px 25px;
+            border-radius: 9px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+        
+        .btn-primary-custom:hover {
+            background: #edf9ff;
+            color: #0568bb;
+            transform: translateY(-3px);
+        }
+        
+        .btn-outline-custom {
+            border: 1px solid rgba(255, 255, 255, 0.7);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 9px;
+            margin-left: 10px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+        
+        .btn-outline-custom:hover {
+            background: white;
+            color: #087fe5;
+        }
+        /* =====================================================
+       ABOUT SECTION
+    ===================================================== */
+        
+        .about-section {
+            background: white;
+        }
+        
+        .about-image-wrapper {
+            position: relative;
+            padding-right: 25px;
+        }
+        
+        .about-image {
+            width: 100%;
+            height: 460px;
+            object-fit: cover;
+            border-radius: 25px;
+            box-shadow: 0 25px 55px rgba(0, 70, 120, 0.14);
+        }
+        
+        .experience-card {
+            position: absolute;
+            right: 0;
+            bottom: 30px;
+            background: white;
+            padding: 20px;
+            width: 175px;
+            text-align: center;
+            border-radius: 18px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+        
+        .experience-card i {
+            color: #087fe5;
+            font-size: 30px;
+        }
+        
+        .experience-card h3 {
+            color: #087fe5;
+            font-size: 30px;
+            font-weight: 800;
+            margin: 3px 0;
+        }
+        
+        .experience-card p {
+            margin: 0;
+            font-size: 12px;
+            color: #6c7d8d;
+        }
+        
+        .about-content {
+            padding-left: 30px;
+        }
+        
+        .about-content .mini-title {
+            color: #087fe5;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 2px;
+        }
+        
+        .about-content h2 {
+            color: #123c5a;
+            font-size: 36px;
+            font-weight: 700;
+            margin: 12px 0 20px;
+        }
+        
+        .about-content p {
+            color: #718397;
+            line-height: 1.9;
+            margin-bottom: 15px;
+        }
+        
+        .check-list {
+            list-style: none;
+            padding: 0;
+            margin: 25px 0;
+        }
+        
+        .check-list li {
+            color: #40566a;
+            font-weight: 500;
+            margin-bottom: 14px;
+        }
+        
+        .check-list i {
+            color: #08b77b;
+            margin-right: 10px;
+        }
+        /* =====================================================
+       MISSION / VISION
+    ===================================================== */
+        
+        .mission-section {
+            background: #f3faff;
+        }
+        
+        .info-card {
+            background: white;
+            border: 1px solid #e6f0f7;
+            border-radius: 22px;
+            padding: 40px 30px;
+            text-align: center;
+            height: 100%;
+            transition: 0.4s;
+            box-shadow: 0 8px 30px rgba(0, 80, 130, 0.05);
+        }
+        
+        .info-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 45px rgba(0, 100, 170, 0.13);
+        }
+        
+        .info-icon {
+            width: 75px;
+            height: 75px;
+            margin: auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #e9f7ff;
+            color: #087fe5;
+            border-radius: 20px;
+            font-size: 32px;
+        }
+        
+        .info-card h4 {
+            color: #153f5d;
+            font-weight: 700;
+            margin-top: 25px;
+        }
+        
+        .info-card p {
+            color: #718397;
+            line-height: 1.8;
+            margin-top: 12px;
+        }
+        /* =====================================================
+       FEATURES
+    ===================================================== */
+        
+        .features-section {
+            background: white;
+        }
+        
+        .feature-card {
+            position: relative;
+            height: 100%;
+            background: #ffffff;
+            border: 1px solid #e4edf4;
+            border-radius: 20px;
+            padding: 30px;
+            overflow: hidden;
+            transition: 0.4s;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-8px);
+            border-color: #bfe7fb;
+            box-shadow: 0 20px 45px rgba(0, 100, 170, 0.11);
+        }
+        
+        .feature-card::after {
+            content: "";
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background: #eff9ff;
+            border-radius: 50%;
+            top: -40px;
+            right: -40px;
+        }
+        
+        .feature-icon {
+            width: 65px;
+            height: 65px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #e9f7ff;
+            color: #087fe5;
+            border-radius: 16px;
+            font-size: 28px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .feature-card h4 {
+            color: #153f5d;
+            font-size: 19px;
+            font-weight: 700;
+            margin-top: 20px;
+        }
+        
+        .feature-card p {
+            color: #718397;
+            line-height: 1.8;
+            font-size: 14px;
+        }
+        /* =====================================================
+       STATISTICS
+    ===================================================== */
+        
+        .statistics {
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient( 135deg, #0067b8, #00a6d8);
+            color: white;
+        }
+        
+        .statistics::before {
+            content: "";
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            border: 90px solid rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+            right: -200px;
+            top: -300px;
+        }
+        
+        .stat-item {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            padding: 15px;
+            border-right: 1px solid rgba(255, 255, 255, 0.25);
+        }
+        
+        .stat-item:last-child {
+            border-right: none;
+        }
+        
+        .stat-icon {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+        
+        .stat-item h2 {
+            font-size: 40px;
+            font-weight: 800;
+            margin: 0;
+        }
+        
+        .stat-item p {
+            margin-top: 5px;
+            opacity: 0.9;
+        }
+        /* =====================================================
+       TECHNOLOGY
+    ===================================================== */
+        
+        .technology {
+            background: #f5fbff;
+        }
+        
+        .technology-box {
+            background: white;
+            border-radius: 25px;
+            padding: 45px;
+            box-shadow: 0 15px 45px rgba(0, 70, 130, 0.08);
+        }
+        
+        .technology-box h2 {
+            color: #123c5a;
+            font-size: 34px;
+            font-weight: 700;
+            margin: 10px 0 18px;
+        }
+        
+        .technology-box>p {
+            color: #718397;
+            line-height: 1.9;
+        }
+        
+        .technology-list {
+            margin-top: 25px;
+        }
+        
+        .technology-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 16px;
+            color: #40566a;
+            font-weight: 500;
+        }
+        
+        .technology-item span {
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            background: #e9f7ff;
+            color: #087fe5;
+            font-size: 20px;
+        }
+        
+        .technology-image {
+            width: 100%;
+            height: 430px;
+            object-fit: cover;
+            border-radius: 25px;
+            box-shadow: 0 20px 50px rgba(0, 70, 130, 0.12);
+        }
+        /* =====================================================
+       CTA
+    ===================================================== */
+        
+        .cta-section {
+            background: white;
+        }
+        
+        .cta {
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient( 135deg, #087fe5, #00a7d8);
+            color: white;
+            border-radius: 28px;
+            padding: 65px 40px;
+            text-align: center;
+            box-shadow: 0 20px 50px rgba(0, 100, 180, 0.2);
+        }
+        
+        .cta::before {
+            content: "";
+            position: absolute;
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.08);
+            left: -80px;
+            top: -120px;
+        }
+        
+        .cta::after {
+            content: "";
+            position: absolute;
+            width: 220px;
+            height: 220px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.07);
+            right: -80px;
+            bottom: -120px;
+        }
+        
+        .cta-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .cta h2 {
+            font-size: 34px;
+            font-weight: 800;
+        }
+        
+        .cta p {
+            max-width: 680px;
+            margin: 15px auto 25px;
+            opacity: 0.9;
+        }
+        
+        .cta-btn {
+            display: inline-block;
+            background: white;
+            color: #087fe5;
+            padding: 13px 28px;
+            border-radius: 9px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+        
+        .cta-btn:hover {
+            color: #0568bb;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+        /* =====================================================
+       FOOTER
+    ===================================================== */
+        
+        footer {
+            background: #082b45;
+            color: #b7c9d7;
+            padding-top: 65px;
+        }
+        
+        .footer-brand {
+            color: white;
+            font-size: 24px;
+            font-weight: 800;
+        }
+        
+        .footer-brand i {
+            color: #39c7f2;
+        }
+        
+        .footer-description {
+            color: #9fb5c5;
+            line-height: 1.8;
+            margin-top: 18px;
+        }
+        
+        .footer-heading {
+            color: white;
+            font-size: 17px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+        
+        .footer-links {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .footer-links li {
+            margin-bottom: 11px;
+        }
+        
+        .footer-links a {
+            color: #9fb5c5;
+            transition: 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: #39c7f2;
+            padding-left: 5px;
+        }
+        
+        .contact-line {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 14px;
+            color: #9fb5c5;
+        }
+        
+        .contact-line i {
+            color: #39c7f2;
+            font-size: 18px;
+        }
+        
+        .social-icons {
+            margin-top: 22px;
+        }
+        
+        .social-icons a {
+            display: inline-flex;
+            width: 40px;
+            height: 40px;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.08);
+            color: white;
+            margin-right: 7px;
+            transition: 0.3s;
+        }
+        
+        .social-icons a:hover {
+            background: #087fe5;
+            transform: translateY(-4px);
+        }
+        
+        .footer-bottom {
+            margin-top: 45px;
+            padding: 20px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            color: #829baa;
+            font-size: 13px;
+        }
+        /* =====================================================
+       BACK TO TOP
+    ===================================================== */
+        
+        .back-top {
+            position: fixed;
+            right: 22px;
+            bottom: 22px;
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #087fe5;
+            color: white;
+            border-radius: 50%;
+            box-shadow: 0 8px 25px rgba(0, 100, 180, 0.3);
+            z-index: 1000;
+            transition: 0.3s;
+        }
+        
+        .back-top:hover {
+            background: #0568bb;
+            color: white;
+            transform: translateY(-4px);
+        }
+        /* =====================================================
+       ANIMATIONS
+    ===================================================== */
+        
+        .fade-up {
+            animation: fadeUp 1s ease;
+        }
+        
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        /* =====================================================
+       RESPONSIVE
+    ===================================================== */
+        
+        @media (max-width: 991px) {
+            .top-contact {
+                justify-content: center;
+            }
+            .navbar-nav {
+                margin-top: 15px;
+                padding: 10px;
+                background: white;
+                border-radius: 12px;
+            }
+            .nav-special {
+                margin-left: 0;
+                margin-top: 5px;
+                display: inline-block;
+            }
+            .hero {
+                min-height: 450px;
+            }
+            .hero h1 {
+                font-size: 42px;
+            }
+            .about-content {
+                padding-left: 0;
+                margin-top: 50px;
+            }
+            .stat-item {
+                border-right: none;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+                padding: 25px;
+            }
+            .stat-item:last-child {
+                border-bottom: none;
+            }
+        }
+        
+        @media (max-width: 767px) {
+            .top-bar {
+                display: none;
+            }
+            .section-padding {
+                padding: 65px 0;
+            }
+            .hero {
+                min-height: 430px;
+                text-align: center;
+            }
+            .hero h1 {
+                font-size: 34px;
+            }
+            .hero p {
+                font-size: 15px;
+            }
+            .btn-outline-custom {
+                display: inline-block;
+                margin-left: 0;
+                margin-top: 10px;
+            }
+            .about-image-wrapper {
+                padding-right: 0;
+            }
+            .about-image {
+                height: 350px;
+            }
+            .experience-card {
+                right: 10px;
+            }
+            .technology-box {
+                padding: 30px 22px;
+            }
+            .technology-image {
+                height: 320px;
+                margin-top: 30px;
+            }
+            .cta {
+                padding: 50px 25px;
+            }
+            .cta h2 {
+                font-size: 27px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .navbar-brand {
+                font-size: 20px;
+            }
+            .hero h1 {
+                font-size: 29px;
+            }
+            .section-heading h2 {
+                font-size: 28px;
+            }
+            .about-content h2 {
+                font-size: 28px;
+            }
+            .about-image {
+                height: 290px;
+            }
+            .experience-card {
+                width: 145px;
+                padding: 14px;
+            }
+            .experience-card h3 {
+                font-size: 25px;
+            }
+        }
+    </style>
+    ```
+
 </head>
 
-<body>
+<body id="top">
 
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+    ```
+    <!-- =====================================================
+     TOP BAR
+====================================================== -->
+
+    <div class="top-bar">
+
         <div class="container">
 
-            <a class="navbar-brand fw-bold text-primary" href="index.html">
-                <i class="bi bi-heart-pulse-fill"></i> Healthcare ML
+            <div class="top-contact">
+
+                <span>
+                <i class="bi bi-telephone-fill"></i>
+                Emergency: +91 98765 43210
+            </span>
+
+                <span>
+                <i class="bi bi-clock-fill"></i>
+                Open 24×7
+            </span>
+
+                <span>
+                <i class="bi bi-envelope-fill"></i>
+                info@healthcareml.com
+            </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+     NAVBAR
+====================================================== -->
+
+    <nav class="navbar navbar-expand-lg">
+
+        <div class="container">
+
+            <a class="navbar-brand" href="index.html">
+
+                <i class="bi bi-heart-pulse-fill"></i>
+
+                <span class="brand-text">
+                Healthcare <span>ML</span>
+                </span>
+
             </a>
 
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu">
-                <span class="navbar-toggler-icon"></span>
-            </button>
 
-            <div class="collapse navbar-collapse" id="menu">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainMenu">
 
-                <ul class="navbar-nav ms-auto">
+            <span class="navbar-toggler-icon"></span>
+
+        </button>
+
+
+            <div class="collapse navbar-collapse" id="mainMenu">
+
+                <ul class="navbar-nav ms-auto align-items-lg-center">
 
                     <li class="nav-item">
-                        <a class="nav-link" href="index.html">Home</a>
+                        <a class="nav-link" href="index.html">
+                        Home
+                    </a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link active" href="about.html">About</a>
+                        <a class="nav-link active" href="about.html">
+                        About
+                    </a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="departments.html">Departments</a>
+                        <a class="nav-link" href="departments.html">
+                        Departments
+                    </a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="doctors.html">Doctors</a>
+                        <a class="nav-link" href="doctors.html">
+                        Doctors
+                    </a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="predict.html">Disease Prediction</a>
+                        <a class="nav-link" href="predict.html">
+                        Disease Prediction
+                    </a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="appointment.html">Appointment</a>
+                        <a class="nav-link" href="appointment.html">
+                        Appointment
+                    </a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="admin_login.html">admin login</a>
+                        <a class="nav-link" href="admin_login.html">
+                            <i class="bi bi-shield-lock-fill"></i> Admin
+                        </a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="patient_registration.html">patient registration</a>
+                        <a class="nav-link nav-special" href="patient_registration.html">
+
+                            <i class="bi bi-person-plus-fill"></i> Register
+
+                        </a>
                     </li>
+
                 </ul>
 
             </div>
+
         </div>
+
     </nav>
 
-    <!-- Banner -->
-    <section class="banner py-5 text-center">
+
+    <!-- =====================================================
+     HERO
+====================================================== -->
+
+    <section class="hero">
+
         <div class="container">
-            <h1>About Our Healthcare System</h1>
-            <p class="lead">
-                AI-powered disease prediction for faster healthcare guidance.
-            </p>
-        </div>
-    </section>
 
-    <!-- About -->
-    <section class="container py-5">
+            <div class="hero-content fade-up">
 
-        <div class="row align-items-center">
+                <div class="hero-badge">
 
-            <div class="col-lg-6">
-                <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=900&q=80" class="img-fluid rounded shadow" alt="Healthcare">
-            </div>
+                    <i class="bi bi-heart-pulse-fill"></i> Smart Healthcare • AI • Machine Learning
 
-            <div class="col-lg-6">
+                </div>
 
-                <h2>Who We Are</h2>
+                <h1>
+                    About Our
+                    <span>Healthcare System</span>
+                </h1>
 
                 <p>
-                    Healthcare Disease Prediction System is an AI-powered web application that predicts possible diseases based on patient symptoms using Machine Learning algorithms.
+
+                    A modern healthcare platform that combines Artificial Intelligence and Machine Learning to provide intelligent disease prediction and better healthcare guidance.
+
                 </p>
+
+                <div class="hero-buttons">
+
+                    <a href="predict.html" class="btn btn-primary-custom">
+
+                        <i class="bi bi-cpu-fill me-2"></i> Try Disease Prediction
+
+                    </a>
+
+                    <a href="appointment.html" class="btn btn-outline-custom">
+
+                        <i class="bi bi-calendar-check me-2"></i> Book Appointment
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+     ABOUT US
+====================================================== -->
+
+    <section class="about-section section-padding">
+
+        <div class="container">
+
+            <div class="row align-items-center">
+
+                <div class="col-lg-6">
+
+                    <div class="about-image-wrapper">
+
+                        <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1000&q=85" class="about-image" alt="Hospital Healthcare">
+
+                        <div class="experience-card">
+
+                            <i class="bi bi-award-fill"></i>
+
+                            <h3>98%</h3>
+
+                            <p>Prediction Accuracy</p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="col-lg-6">
+
+                    <div class="about-content">
+
+                        <span class="mini-title">
+                        WHO WE ARE
+                    </span>
+
+                        <h2>
+                            Modern Healthcare With Intelligent Technology
+                        </h2>
+
+                        <p>
+
+                            Healthcare Disease Prediction System is an AI-powered web application designed to help users understand possible health conditions based on their symptoms.
+
+                        </p>
+
+                        <p>
+
+                            Our platform uses Machine Learning algorithms to analyze symptoms and provide possible disease predictions along with healthcare guidance.
+
+                        </p>
+
+                        <ul class="check-list">
+
+                            <li>
+                                <i class="bi bi-check-circle-fill"></i> AI-based disease prediction
+                            </li>
+
+                            <li>
+                                <i class="bi bi-check-circle-fill"></i> Easy and user-friendly interface
+                            </li>
+
+                            <li>
+                                <i class="bi bi-check-circle-fill"></i> Medical department recommendations
+                            </li>
+
+                            <li>
+                                <i class="bi bi-check-circle-fill"></i> Secure patient information
+                            </li>
+
+                        </ul>
+
+                        <a href="predict.html" class="btn btn-primary px-4 py-2">
+
+                        Explore AI Prediction
+                        <i class="bi bi-arrow-right ms-2"></i>
+
+                    </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+     MISSION / VISION
+====================================================== -->
+
+    <section class="mission-section section-padding">
+
+        <div class="container">
+
+            <div class="section-heading">
+
+                <span class="mini-title">
+                OUR PURPOSE
+            </span>
+
+                <h2>
+                    Mission, Vision & Values
+                </h2>
 
                 <p>
-                    Our platform helps patients understand their health conditions, recommends suitable medical departments, and supports faster healthcare decisions.
+                    Building a smarter and more accessible healthcare experience through technology.
                 </p>
 
             </div>
 
-        </div>
 
-    </section>
+            <div class="row g-4">
 
-    <!-- Mission -->
-    <section class="bg-light py-5">
+                <div class="col-lg-4">
 
-        <div class="container text-center">
+                    <div class="info-card">
 
-            <h2>Our Mission</h2>
+                        <div class="info-icon">
 
-            <p>
-                To improve healthcare awareness by combining Artificial Intelligence, Machine Learning, and modern healthcare technologies.
-            </p>
+                            <i class="bi bi-bullseye"></i>
 
-        </div>
+                        </div>
 
-    </section>
+                        <h4>Our Mission</h4>
 
-    <!-- Features -->
-    <section class="container py-5">
+                        <p>
 
-        <h2 class="text-center mb-5">
-            Why Choose Our System?
-        </h2>
+                            To improve healthcare awareness by combining Artificial Intelligence, Machine Learning and modern healthcare technologies.
 
-        <div class="row">
+                        </p>
 
-            <div class="col-md-4 mb-4">
-
-                <div class="card text-center h-100 p-4">
-
-                    <i class="bi bi-cpu-fill display-4 text-primary"></i>
-
-                    <h4 class="mt-3">
-                        AI Prediction
-                    </h4>
-
-                    <p>
-                        Predict diseases using advanced Machine Learning technology.
-                    </p>
+                    </div>
 
                 </div>
 
-            </div>
 
-            <div class="col-md-4 mb-4">
+                <div class="col-lg-4">
 
-                <div class="card text-center h-100 p-4">
+                    <div class="info-card">
 
-                    <i class="bi bi-hospital-fill display-4 text-primary"></i>
+                        <div class="info-icon">
 
-                    <h4 class="mt-3">
-                        Hospital Guidance
-                    </h4>
+                            <i class="bi bi-eye-fill"></i>
 
-                    <p>
-                        Get recommendations for the correct medical department.
-                    </p>
+                        </div>
+
+                        <h4>Our Vision</h4>
+
+                        <p>
+
+                            To create a smarter healthcare ecosystem where technology helps patients make informed healthcare decisions.
+
+                        </p>
+
+                    </div>
 
                 </div>
 
-            </div>
 
-            <div class="col-md-4 mb-4">
+                <div class="col-lg-4">
 
-                <div class="card text-center h-100 p-4">
+                    <div class="info-card">
 
-                    <i class="bi bi-shield-check display-4 text-primary"></i>
+                        <div class="info-icon">
 
-                    <h4 class="mt-3">
-                        Secure Records
-                    </h4>
+                            <i class="bi bi-heart-fill"></i>
 
-                    <p>
-                        Your healthcare information is stored securely and privately.
-                    </p>
+                        </div>
+
+                        <h4>Patient First</h4>
+
+                        <p>
+
+                            We focus on simple, secure and user-friendly healthcare solutions designed around patient needs.
+
+                        </p>
+
+                    </div>
 
                 </div>
 
@@ -190,31 +1267,380 @@
 
     </section>
 
-    <!-- Statistics -->
-    <section class="bg-primary text-white py-5">
+
+    <!-- =====================================================
+     FEATURES
+====================================================== -->
+
+    <section class="features-section section-padding">
 
         <div class="container">
 
-            <div class="row text-center">
+            <div class="section-heading">
 
-                <div class="col-md-3">
-                    <h2>25+</h2>
-                    <p>Diseases</p>
+                <span class="mini-title">
+                WHY CHOOSE US
+            </span>
+
+                <h2>
+                    Healthcare Features
+                </h2>
+
+                <p>
+                    Powerful healthcare services designed with modern technology.
+                </p>
+
+            </div>
+
+
+            <div class="row g-4">
+
+
+                <div class="col-md-6 col-lg-4">
+
+                    <div class="feature-card">
+
+                        <div class="feature-icon">
+                            <i class="bi bi-cpu-fill"></i>
+                        </div>
+
+                        <h4>
+                            AI Disease Prediction
+                        </h4>
+
+                        <p>
+                            Analyze patient symptoms using Machine Learning and generate possible disease predictions.
+                        </p>
+
+                    </div>
+
                 </div>
 
-                <div class="col-md-3">
-                    <h2>15+</h2>
-                    <p>Departments</p>
+
+                <div class="col-md-6 col-lg-4">
+
+                    <div class="feature-card">
+
+                        <div class="feature-icon">
+                            <i class="bi bi-hospital-fill"></i>
+                        </div>
+
+                        <h4>
+                            Hospital Guidance
+                        </h4>
+
+                        <p>
+                            Get suitable medical department recommendations based on the predicted condition.
+                        </p>
+
+                    </div>
+
                 </div>
 
-                <div class="col-md-3">
-                    <h2>50+</h2>
-                    <p>Doctors</p>
+
+                <div class="col-md-6 col-lg-4">
+
+                    <div class="feature-card">
+
+                        <div class="feature-icon">
+                            <i class="bi bi-person-badge-fill"></i>
+                        </div>
+
+                        <h4>
+                            Expert Doctors
+                        </h4>
+
+                        <p>
+                            Explore doctors and specialists from different medical departments.
+                        </p>
+
+                    </div>
+
                 </div>
 
-                <div class="col-md-3">
-                    <h2>24×7</h2>
-                    <p>Support</p>
+
+                <div class="col-md-6 col-lg-4">
+
+                    <div class="feature-card">
+
+                        <div class="feature-icon">
+                            <i class="bi bi-calendar-check-fill"></i>
+                        </div>
+
+                        <h4>
+                            Easy Appointment
+                        </h4>
+
+                        <p>
+                            Book appointments through a simple and convenient online appointment system.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="col-md-6 col-lg-4">
+
+                    <div class="feature-card">
+
+                        <div class="feature-icon">
+                            <i class="bi bi-shield-check"></i>
+                        </div>
+
+                        <h4>
+                            Secure Records
+                        </h4>
+
+                        <p>
+                            Patient information is handled securely with privacy-focused healthcare practices.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="col-md-6 col-lg-4">
+
+                    <div class="feature-card">
+
+                        <div class="feature-icon">
+                            <i class="bi bi-phone-fill"></i>
+                        </div>
+
+                        <h4>
+                            Mobile Friendly
+                        </h4>
+
+                        <p>
+                            Access the healthcare platform easily from desktop, tablet and mobile devices.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+     STATISTICS
+====================================================== -->
+
+    <section class="statistics section-padding">
+
+        <div class="container">
+
+            <div class="row text-center g-0">
+
+
+                <div class="col-6 col-lg-3">
+
+                    <div class="stat-item">
+
+                        <div class="stat-icon">
+                            <i class="bi bi-virus"></i>
+                        </div>
+
+                        <h2>25+</h2>
+
+                        <p>
+                            Diseases
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="col-6 col-lg-3">
+
+                    <div class="stat-item">
+
+                        <div class="stat-icon">
+                            <i class="bi bi-building"></i>
+                        </div>
+
+                        <h2>15+</h2>
+
+                        <p>
+                            Departments
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="col-6 col-lg-3">
+
+                    <div class="stat-item">
+
+                        <div class="stat-icon">
+                            <i class="bi bi-people-fill"></i>
+                        </div>
+
+                        <h2>50+</h2>
+
+                        <p>
+                            Doctors
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="col-6 col-lg-3">
+
+                    <div class="stat-item">
+
+                        <div class="stat-icon">
+                            <i class="bi bi-clock-fill"></i>
+                        </div>
+
+                        <h2>24×7</h2>
+
+                        <p>
+                            Healthcare Support
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+     TECHNOLOGY
+====================================================== -->
+
+    <section class="technology section-padding">
+
+        <div class="container">
+
+            <div class="row align-items-center">
+
+
+                <div class="col-lg-6">
+
+                    <div class="technology-box">
+
+                        <span class="mini-title">
+                        OUR TECHNOLOGY
+                    </span>
+
+                        <h2>
+                            Healthcare Meets Machine Learning
+                        </h2>
+
+                        <p>
+
+                            Our system combines modern web development with Machine Learning technology to provide an intelligent healthcare experience.
+
+                        </p>
+
+
+                        <div class="technology-list">
+
+
+                            <div class="technology-item">
+
+                                <span>
+                                <i class="bi bi-code-slash"></i>
+                            </span> HTML, CSS & Bootstrap
+
+                            </div>
+
+
+                            <div class="technology-item">
+
+                                <span>
+                                <i class="bi bi-filetype-py"></i>
+                            </span> Python & Machine Learning
+
+                            </div>
+
+
+                            <div class="technology-item">
+
+                                <span>
+                                <i class="bi bi-database-fill"></i>
+                            </span> Database Management
+
+                            </div>
+
+
+                            <div class="technology-item">
+
+                                <span>
+                                <i class="bi bi-graph-up-arrow"></i>
+                            </span> Disease Prediction Model
+
+                            </div>
+
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="col-lg-6">
+
+                    <img src="https://images.unsplash.com/photo-1559757175-0eb30cd8c063?auto=format&fit=crop&w=1000&q=85" class="technology-image" alt="Medical Technology">
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+     CTA
+====================================================== -->
+
+    <section class="cta-section section-padding">
+
+        <div class="container">
+
+            <div class="cta">
+
+                <div class="cta-content">
+
+                    <h2>
+                        Start Your Healthcare Journey Today
+                    </h2>
+
+                    <p>
+
+                        Use our AI-powered disease prediction system to analyze symptoms and receive healthcare guidance.
+
+                    </p>
+
+                    <a href="predict.html" class="cta-btn">
+
+                        <i class="bi bi-cpu-fill me-2"></i> Start Disease Prediction
+
+                    </a>
+
                 </div>
 
             </div>
@@ -223,27 +1649,225 @@
 
     </section>
 
-    <!-- Footer -->
-    <footer class="bg-dark text-white text-center py-4">
+
+    <!-- =====================================================
+     FOOTER
+====================================================== -->
+
+    <footer>
 
         <div class="container">
 
-            <h4>Healthcare Disease Prediction System</h4>
+            <div class="row g-5">
 
-            <p>
-                AI Powered Healthcare Solution using Machine Learning
-            </p>
 
-            <p>
-                © 2026 All Rights Reserved.
-            </p>
+                <!-- Brand -->
+
+                <div class="col-lg-4">
+
+                    <div class="footer-brand">
+
+                        <i class="bi bi-heart-pulse-fill"></i> Healthcare ML
+
+                    </div>
+
+                    <p class="footer-description">
+
+                        AI-powered Healthcare Disease Prediction System designed to combine Machine Learning with modern healthcare services.
+
+                    </p>
+
+
+                    <div class="social-icons">
+
+                        <a href="#">
+                            <i class="bi bi-facebook"></i>
+                        </a>
+
+                        <a href="#">
+                            <i class="bi bi-instagram"></i>
+                        </a>
+
+                        <a href="#">
+                            <i class="bi bi-twitter-x"></i>
+                        </a>
+
+                        <a href="#">
+                            <i class="bi bi-linkedin"></i>
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Quick Links -->
+
+                <div class="col-6 col-lg-2">
+
+                    <h5 class="footer-heading">
+                        Quick Links
+                    </h5>
+
+                    <ul class="footer-links">
+
+                        <li>
+                            <a href="index.html">
+                            Home
+                        </a>
+                        </li>
+
+                        <li>
+                            <a href="about.html">
+                            About
+                        </a>
+                        </li>
+
+                        <li>
+                            <a href="departments.html">
+                            Departments
+                        </a>
+                        </li>
+
+                        <li>
+                            <a href="doctors.html">
+                            Doctors
+                        </a>
+                        </li>
+
+                    </ul>
+
+                </div>
+
+
+                <!-- Services -->
+
+                <div class="col-6 col-lg-2">
+
+                    <h5 class="footer-heading">
+                        Services
+                    </h5>
+
+                    <ul class="footer-links">
+
+                        <li>
+                            <a href="predict.html">
+                            Disease Prediction
+                        </a>
+                        </li>
+
+                        <li>
+                            <a href="appointment.html">
+                            Appointment
+                        </a>
+                        </li>
+
+                        <li>
+                            <a href="patient_registration.html">
+                            Patient Register
+                        </a>
+                        </li>
+
+                        <li>
+                            <a href="admin_login.html">
+                            Admin Login
+                        </a>
+                        </li>
+
+                    </ul>
+
+                </div>
+
+
+                <!-- Contact -->
+
+                <div class="col-lg-4">
+
+                    <h5 class="footer-heading">
+                        Contact Information
+                    </h5>
+
+
+                    <div class="contact-line">
+
+                        <i class="bi bi-geo-alt-fill"></i>
+
+                        <span>
+                        Ahmedabad, Gujarat, India
+                    </span>
+
+                    </div>
+
+
+                    <div class="contact-line">
+
+                        <i class="bi bi-telephone-fill"></i>
+
+                        <span>
+                        +91 98765 43210
+                    </span>
+
+                    </div>
+
+
+                    <div class="contact-line">
+
+                        <i class="bi bi-envelope-fill"></i>
+
+                        <span>
+                        info@healthcareml.com
+                    </span>
+
+                    </div>
+
+
+                    <div class="contact-line">
+
+                        <i class="bi bi-clock-fill"></i>
+
+                        <span>
+                        Emergency Support: 24×7
+                    </span>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+            <div class="footer-bottom">
+
+                <p class="mb-0">
+
+                    © 2026 Healthcare Disease Prediction System. All Rights Reserved.
+
+                </p>
+
+            </div>
 
         </div>
 
     </footer>
 
+
+    <!-- =====================================================
+     BACK TO TOP
+====================================================== -->
+
+    <a href="#top" class="back-top">
+
+        <i class="bi bi-arrow-up"></i>
+
+    </a>
+
+
     <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+    </script>
+    ```
 
 </body>
 
