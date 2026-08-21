@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -13,107 +14,729 @@
     <!-- Bootstrap Icons -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
 
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
     <style>
-        body {
-            font-family: Arial, Helvetica, sans-serif;
-            background: #f5f9ff;
+        /* ================================
+           GLOBAL
+        ================================= */
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-        /* Navbar */
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: "Poppins", sans-serif;
+            background: #f4f9ff;
+            color: #26364a;
+            overflow-x: hidden;
+        }
+        
+        a {
+            text-decoration: none;
+        }
+        
+         ::selection {
+            background: #0066ff;
+            color: white;
+        }
+        /* ================================
+           NAVBAR
+        ================================= */
         
         .navbar {
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            background: rgba(255, 255, 255, 0.96) !important;
+            backdrop-filter: blur(15px);
+            box-shadow: 0 5px 25px rgba(0, 61, 130, 0.08);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 999;
+            transition: 0.3s ease;
         }
         
         .navbar-brand {
             font-size: 24px;
+            font-weight: 700;
+            color: #0066ff !important;
+            letter-spacing: -0.5px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
-        /* Hero Section */
+        
+        .navbar-brand i {
+            font-size: 30px;
+            animation: heartbeat 1.8s infinite;
+        }
+        
+        @keyframes heartbeat {
+            0%,
+            100% {
+                transform: scale(1);
+            }
+            15% {
+                transform: scale(1.15);
+            }
+            30% {
+                transform: scale(1);
+            }
+            45% {
+                transform: scale(1.1);
+            }
+        }
+        
+        .nav-link {
+            color: #43536a !important;
+            font-weight: 500;
+            font-size: 14px;
+            padding: 9px 13px !important;
+            margin: 0 2px;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .nav-link:hover {
+            color: #0066ff !important;
+            background: #edf5ff;
+            transform: translateY(-2px);
+        }
+        
+        .nav-link.active {
+            color: #0066ff !important;
+            background: #eaf3ff;
+            font-weight: 600;
+        }
+        
+        .navbar-toggler {
+            border: none;
+            box-shadow: none !important;
+        }
+        /* ================================
+           HERO
+        ================================= */
         
         .hero {
-            background: linear-gradient(rgba(0, 105, 255, 0.85), rgba(0, 105, 255, 0.85)), url("https://images.unsplash.com/photo-1586773860418-d37222d8fce3");
+            min-height: 560px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, rgba(0, 51, 153, 0.94), rgba(0, 115, 255, 0.82)), url("https://images.unsplash.com/photo-1586773860418-d37222d8fce3");
             background-size: cover;
             background-position: center;
             color: white;
-            padding: 100px 0;
             text-align: center;
         }
         
-        .hero h1 {
-            font-size: 50px;
-            font-weight: bold;
+        .hero::before {
+            content: "";
+            position: absolute;
+            width: 450px;
+            height: 450px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 50%;
+            top: -180px;
+            left: -130px;
+            animation: rotateCircle 15s linear infinite;
         }
-        /* Cards */
         
-        .card {
-            border: none;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        .hero::after {
+            content: "";
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 50%;
+            right: -200px;
+            bottom: -250px;
+            animation: rotateCircle 18s linear infinite reverse;
+        }
+        
+        @keyframes rotateCircle {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 900px;
+            padding: 40px 20px;
+            animation: heroFade 1.2s ease;
+        }
+        
+        @keyframes heroFade {
+            from {
+                opacity: 0;
+                transform: translateY(35px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .hero-icon {
+            width: 85px;
+            height: 85px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 25px;
+            background: rgba(255, 255, 255, 0.16);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 25px;
+            backdrop-filter: blur(10px);
+            font-size: 42px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+        
+        .hero h1 {
+            font-size: clamp(38px, 6vw, 64px);
+            font-weight: 800;
+            line-height: 1.15;
+            margin-bottom: 20px;
+            letter-spacing: -1px;
+        }
+        
+        .hero p {
+            max-width: 720px;
+            margin: 0 auto 30px;
+            font-size: 18px;
+            line-height: 1.8;
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        .hero .btn {
+            padding: 14px 32px;
+            font-weight: 600;
+            transition: 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
+        }
+        
+        .hero .btn:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+        }
+        /* ================================
+           SECTION
+        ================================= */
+        
+        section {
+            position: relative;
         }
         
         .section-title {
             text-align: center;
             color: #0066ff;
-            font-weight: bold;
-            margin-bottom: 40px;
+            font-weight: 700;
+            font-size: 34px;
+            margin-bottom: 50px;
+            position: relative;
         }
-        /* Appointment Form */
+        
+        .section-title::after {
+            content: "";
+            display: block;
+            width: 65px;
+            height: 4px;
+            background: linear-gradient(90deg, #0066ff, #00bfff);
+            border-radius: 10px;
+            margin: 15px auto 0;
+        }
+        /* ================================
+           APPOINTMENT SECTION
+        ================================= */
+        
+        #appointment {
+            padding-top: 80px !important;
+            padding-bottom: 80px !important;
+        }
+        
+        .appointment-card {
+            max-width: 1100px;
+            margin: auto;
+            background: rgba(255, 255, 255, 0.95);
+            border: 1px solid #e3efff;
+            border-radius: 30px;
+            padding: 45px;
+            box-shadow: 0 20px 60px rgba(0, 70, 150, 0.10), 0 5px 20px rgba(0, 0, 0, 0.03);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .appointment-card::before {
+            content: "";
+            position: absolute;
+            width: 180px;
+            height: 180px;
+            background: #eaf4ff;
+            border-radius: 50%;
+            right: -70px;
+            top: -70px;
+        }
+        
+        .appointment-card::after {
+            content: "";
+            position: absolute;
+            width: 130px;
+            height: 130px;
+            background: #f0f8ff;
+            border-radius: 50%;
+            left: -60px;
+            bottom: -60px;
+        }
+        
+        .appointment-card form {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .form-label,
+        label {
+            color: #34495e;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
         
         .form-control,
         .form-select {
-            border-radius: 10px;
-            padding: 12px;
+            border: 1px solid #dce8f5;
+            background: #fafdff;
+            border-radius: 13px;
+            padding: 13px 16px;
+            min-height: 50px;
+            color: #34495e;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+        
+        .form-control::placeholder {
+            color: #9aabbc;
+        }
+        
+        .form-control:hover,
+        .form-select:hover {
+            border-color: #a8ccf5;
+            background: #ffffff;
+        }
+        
+        .form-control:focus,
+        .form-select:focus {
+            border-color: #0066ff;
+            box-shadow: 0 0 0 4px rgba(0, 102, 255, 0.08);
+            background: white;
+        }
+        
+        textarea.form-control {
+            min-height: 140px;
+            resize: vertical;
+        }
+        
+        .form-group {
+            position: relative;
+        }
+        
+        .input-icon {
+            position: absolute;
+            right: 17px;
+            bottom: 15px;
+            color: #7da9d9;
         }
         
         .btn-book {
-            background: #0066ff;
+            background: linear-gradient(135deg, #0066ff, #008cff);
+            border: none;
             color: white;
-            padding: 14px;
-            border-radius: 30px;
-            font-size: 18px;
+            padding: 15px 25px;
+            border-radius: 14px;
+            font-size: 16px;
+            font-weight: 600;
+            letter-spacing: 0.2px;
+            box-shadow: 0 10px 25px rgba(0, 102, 255, 0.22);
+            transition: all 0.3s ease;
         }
         
         .btn-book:hover {
-            background: #0047b3;
+            background: linear-gradient(135deg, #0054d6, #0075df);
             color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(0, 102, 255, 0.30);
         }
-        /* Doctor Cards */
         
-        .doctor img {
-            height: 220px;
-            object-fit: cover;
-            border-radius: 20px 20px 0 0;
+        .btn-book:active {
+            transform: translateY(0);
         }
-        /* Services */
+        /* ================================
+           SERVICES
+        ================================= */
+        
+        .service-section {
+            padding: 80px 0;
+            background: #ffffff;
+        }
         
         .service-box {
-            background: white;
-            padding: 30px;
-            border-radius: 20px;
+            background: linear-gradient(145deg, #ffffff, #f7fbff);
+            padding: 38px 30px;
+            border: 1px solid #e5eff9;
+            border-radius: 24px;
             text-align: center;
             height: 100%;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .service-box::before {
+            content: "";
+            position: absolute;
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            background: #edf6ff;
+            top: -35px;
+            right: -35px;
+            transition: 0.4s ease;
+        }
+        
+        .service-box:hover {
+            transform: translateY(-10px);
+            border-color: #cce3ff;
+            box-shadow: 0 20px 45px rgba(0, 80, 160, 0.12);
+        }
+        
+        .service-box:hover::before {
+            transform: scale(1.5);
         }
         
         .service-box i {
-            font-size: 45px;
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+            background: #eaf4ff;
+            border-radius: 22px;
+            font-size: 40px;
             color: #0066ff;
+            transition: 0.4s ease;
+            position: relative;
+            z-index: 2;
         }
-        /* Contact */
         
-        .contact-box {
+        .service-box:hover i {
             background: #0066ff;
             color: white;
-            padding: 35px;
-            border-radius: 20px;
+            transform: rotateY(180deg);
         }
-        /* Footer */
+        
+        .service-box h4 {
+            color: #193b62;
+            font-weight: 700;
+            position: relative;
+        }
+        
+        .service-box p {
+            color: #718096;
+            font-size: 14px;
+            line-height: 1.8;
+            margin-bottom: 0;
+            position: relative;
+        }
+        /* ================================
+           DOCTORS
+        ================================= */
+        
+        .doctor-section {
+            padding: 80px 0;
+            background: #f4f9ff;
+        }
+        
+        .doctor {
+            border: 1px solid #e3edf8;
+            border-radius: 22px;
+            overflow: hidden;
+            background: white;
+            box-shadow: 0 10px 30px rgba(0, 60, 130, 0.07);
+            transition: all 0.4s ease;
+        }
+        
+        .doctor:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 45px rgba(0, 70, 150, 0.15);
+        }
+        
+        .doctor-image {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .doctor img {
+            width: 100%;
+            height: 245px;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+        
+        .doctor:hover img {
+            transform: scale(1.08);
+        }
+        
+        .doctor-image::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient( to top, rgba(0, 70, 150, 0.25), transparent 60%);
+            pointer-events: none;
+        }
+        
+        .doctor .card-body {
+            padding: 22px 15px 25px;
+        }
+        
+        .doctor h5 {
+            color: #193b62;
+            font-weight: 700;
+            margin-bottom: 7px;
+        }
+        
+        .doctor p {
+            color: #0066ff;
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 0;
+        }
+        /* ================================
+           CONTACT
+        ================================= */
+        
+        .contact-section {
+            padding: 80px 0;
+            background: white;
+        }
+        
+        .contact-box {
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, #0066ff, #008cff);
+            color: white;
+            padding: 55px 30px;
+            border-radius: 30px;
+            box-shadow: 0 20px 50px rgba(0, 102, 255, 0.22);
+        }
+        
+        .contact-box::before {
+            content: "";
+            position: absolute;
+            width: 250px;
+            height: 250px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 50%;
+            top: -140px;
+            left: -80px;
+        }
+        
+        .contact-box::after {
+            content: "";
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 50%;
+            right: -150px;
+            bottom: -180px;
+        }
+        
+        .contact-box h2,
+        .contact-box h3,
+        .contact-box p {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .contact-box h2 {
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+        
+        .contact-box h3 {
+            font-size: 30px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+        
+        .contact-box h3 i {
+            margin-right: 8px;
+            animation: phoneRing 1.5s infinite;
+        }
+        
+        @keyframes phoneRing {
+            0%,
+            100% {
+                transform: rotate(0);
+            }
+            10% {
+                transform: rotate(15deg);
+            }
+            20% {
+                transform: rotate(-15deg);
+            }
+            30% {
+                transform: rotate(10deg);
+            }
+            40% {
+                transform: rotate(-10deg);
+            }
+            50% {
+                transform: rotate(0);
+            }
+        }
+        
+        .contact-box p {
+            color: rgba(255, 255, 255, 0.85);
+            margin-bottom: 0;
+        }
+        /* ================================
+           FOOTER
+        ================================= */
         
         footer {
-            background: #002b6b;
+            background: #062b59;
             color: white;
-            padding: 30px;
+            padding: 45px 20px;
+            position: relative;
+        }
+        
+        footer::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #0066ff, #00c6ff, #0066ff);
+        }
+        
+        footer h4 {
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+        
+        footer p {
+            color: rgba(255, 255, 255, 0.68);
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+        /* ================================
+           SCROLL ANIMATION
+        ================================= */
+        
+        .reveal {
+            opacity: 0;
+            transform: translateY(35px);
+            transition: all 0.8s ease;
+        }
+        
+        .reveal.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        /* ================================
+           RESPONSIVE
+        ================================= */
+        
+        @media (max-width: 991px) {
+            .navbar-nav {
+                padding-top: 15px;
+            }
+            .nav-link {
+                margin-bottom: 4px;
+            }
+            .hero {
+                min-height: 500px;
+            }
+            .appointment-card {
+                padding: 30px;
+            }
+        }
+        
+        @media (max-width: 767px) {
+            .navbar-brand {
+                font-size: 20px;
+            }
+            .navbar-brand i {
+                font-size: 26px;
+            }
+            .hero {
+                min-height: 470px;
+            }
+            .hero h1 {
+                font-size: 40px;
+            }
+            .hero p {
+                font-size: 15px;
+            }
+            .hero-icon {
+                width: 70px;
+                height: 70px;
+                font-size: 32px;
+            }
+            .section-title {
+                font-size: 28px;
+                margin-bottom: 35px;
+            }
+            .appointment-card {
+                padding: 22px;
+                border-radius: 22px;
+            }
+            .service-section,
+            .doctor-section,
+            .contact-section {
+                padding: 60px 0;
+            }
+            .contact-box {
+                padding: 40px 20px;
+                border-radius: 22px;
+            }
+            .contact-box h3 {
+                font-size: 22px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 34px;
+            }
+            .hero .btn {
+                width: 100%;
+                max-width: 220px;
+            }
+            .appointment-card {
+                padding: 18px;
+            }
+            .form-control,
+            .form-select {
+                font-size: 13px;
+            }
         }
     </style>
-
 
 </head>
 
@@ -121,7 +744,9 @@
 <body>
 
 
-    <!-- Navbar -->
+    <!-- ================================
+         NAVBAR
+    ================================= -->
 
     <nav class="navbar navbar-expand-lg bg-white">
 
@@ -136,25 +761,48 @@
 
             <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#menu">
 
-<span class="navbar-toggler-icon"></span>
+                <i class="bi bi-list fs-2 text-primary"></i>
 
-</button>
+            </button>
 
 
             <div class="collapse navbar-collapse" id="menu">
 
-
                 <ul class="navbar-nav ms-auto">
 
-                    <li class="nav-item"><a class="nav-link" href="index.html">home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
-                    <li class="nav-item"><a class="nav-link" href="departments.html">Departments</a></li>
-                    <li class="nav-item"><a class="nav-link" href="doctors.html">Doctors</a></li>
-                    <li class="nav-item"><a class="nav-link" href="predict.html">Disease Prediction</a></li>
-                    <li class="nav-item"><a class="nav-link active" href="#">Appointment</a></li>
-                    <li class="nav-item"><a class="nav-link" href="admin_login.html">admin Login</a></li>
-                    <li class="nav-item"><a class="nav-link" href="patient_registration.html">patient Register</a></li </ul>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">home</a>
+                    </li>
 
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="departments.html">Departments</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="doctors.html">Doctors</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="predict.html">Disease Prediction</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">Appointment</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="admin_login.html">admin Login</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="patient_registration.html">patient Register</a>
+                    </li>
+
+                </ul>
 
             </div>
 
@@ -164,15 +812,19 @@
 
 
 
-
-    <!-- Hero -->
-
+    <!-- ================================
+         HERO
+    ================================= -->
 
     <section class="hero">
 
+        <div class="hero-content">
 
-        <div class="container">
+            <div class="hero-icon">
 
+                <i class="bi bi-calendar2-heart"></i>
+
+            </div>
 
             <h1>Book Your Appointment</h1>
 
@@ -182,27 +834,23 @@
 
             </p>
 
-
             <a href="#appointment" class="btn btn-light btn-lg rounded-pill">
 
-Book Now
+                Book Now
 
-</a>
-
+            </a>
 
         </div>
-
 
     </section>
 
 
 
-
-    <!-- Appointment Form -->
-
+    <!-- ================================
+         APPOINTMENT FORM
+    ================================= -->
 
     <section class="container py-5" id="appointment">
-
 
         <h2 class="section-title">
 
@@ -211,16 +859,14 @@ Book Now
         </h2>
 
 
-        <div class="card p-5">
-
+        <div class="appointment-card reveal">
 
             <form>
-
 
                 <div class="row">
 
 
-                    <div class="col-md-6 mb-3">
+                    <div class="col-md-6 mb-4">
 
                         <label>Full Name</label>
 
@@ -229,8 +875,7 @@ Book Now
                     </div>
 
 
-
-                    <div class="col-md-6 mb-3">
+                    <div class="col-md-6 mb-4">
 
                         <label>Mobile Number</label>
 
@@ -239,8 +884,7 @@ Book Now
                     </div>
 
 
-
-                    <div class="col-md-6 mb-3">
+                    <div class="col-md-6 mb-4">
 
                         <label>Email Address</label>
 
@@ -249,8 +893,7 @@ Book Now
                     </div>
 
 
-
-                    <div class="col-md-6 mb-3">
+                    <div class="col-md-6 mb-4">
 
                         <label>Age</label>
 
@@ -259,74 +902,57 @@ Book Now
                     </div>
 
 
-
-
-                    <div class="col-md-6 mb-3">
+                    <div class="col-md-6 mb-4">
 
                         <label>Gender</label>
 
                         <select class="form-select">
 
-<option>Male</option>
+                            <option selected disabled>Select Gender</option>
+                            <option>Male</option>
+                            <option>Female</option>
+                            <option>Other</option>
 
-<option>Female</option>
-
-<option>Other</option>
-
-</select>
+                        </select>
 
                     </div>
 
 
-
-
-                    <div class="col-md-6 mb-3">
+                    <div class="col-md-6 mb-4">
 
                         <label>Select Department</label>
 
                         <select class="form-select">
 
+                            <option selected disabled>Select Department</option>
+                            <option>Cardiology</option>
+                            <option>Neurology</option>
+                            <option>Orthopedic</option>
+                            <option>Dermatology</option>
 
-<option>Cardiology</option>
-
-<option>Neurology</option>
-
-<option>Orthopedics</option>
-
-<option>Dermatology</option>
-
-<option>General Medicine</option>
-
-
-</select>
+                        </select>
 
                     </div>
 
 
-
-                    <div class="col-md-6 mb-3">
+                    <div class="col-md-6 mb-4">
 
                         <label>Select Doctor</label>
 
                         <select class="form-select">
 
+                            <option selected disabled>Select Doctor</option>
+                            <option>Dr. Rajesh Sharma</option>
+                            <option>Dr. Neha Patel</option>
+                            <option>Dr. Amit Mehta</option>
+                            <option>Dr. Riya Joshi</option>
 
-<option>Dr. Rajesh Sharma</option>
-
-<option>Dr. Neha Patel</option>
-
-<option>Dr. Amit Mehta</option>
-
-<option>Dr. Riya Joshi</option>
-
-
-</select>
+                        </select>
 
                     </div>
 
 
-
-                    <div class="col-md-6 mb-3">
+                    <div class="col-md-6 mb-4">
 
                         <label>Appointment Date</label>
 
@@ -335,8 +961,7 @@ Book Now
                     </div>
 
 
-
-                    <div class="col-md-6 mb-3">
+                    <div class="col-md-6 mb-4">
 
                         <label>Appointment Time</label>
 
@@ -345,8 +970,7 @@ Book Now
                     </div>
 
 
-
-                    <div class="col-12 mb-3">
+                    <div class="col-12 mb-4">
 
                         <label>Health Problem</label>
 
@@ -355,301 +979,288 @@ Book Now
                     </div>
 
 
-
                     <div class="col-12">
 
                         <button class="btn btn-book w-100">
 
-<i class="bi bi-calendar-check"></i>
+                            <i class="bi bi-calendar-check me-2"></i>
 
-Confirm Appointment
+                            Confirm Appointment
 
-</button>
+                        </button>
 
                     </div>
 
 
                 </div>
-
 
             </form>
 
-
         </div>
-
 
     </section>
 
 
 
+    <!-- ================================
+         SERVICES
+    ================================= -->
 
+    <section class="service-section">
 
-    <!-- Services -->
+        <div class="container">
 
+            <h2 class="section-title">
 
-    <section class="container py-5">
-
-
-        <h2 class="section-title">
-
-            Our Healthcare Services
-
-        </h2>
-
-
-        <div class="row g-4">
-
-
-            <div class="col-md-4">
-
-                <div class="service-box">
-
-                    <i class="bi bi-heart-pulse"></i>
-
-                    <h4 class="mt-3">
-
-                        Heart Care
-
-                    </h4>
-
-                    <p>
-
-                        Advanced cardiac diagnosis and treatment.
-
-                    </p>
-
-
-                </div>
-
-            </div>
-
-
-
-            <div class="col-md-4">
-
-                <div class="service-box">
-
-                    <i class="bi bi-robot"></i>
-
-                    <h4 class="mt-3">
-
-                        AI Disease Prediction
-
-                    </h4>
-
-                    <p>
-
-                        Machine learning based health prediction system.
-
-                    </p>
-
-
-                </div>
-
-            </div>
-
-
-
-
-            <div class="col-md-4">
-
-                <div class="service-box">
-
-                    <i class="bi bi-hospital"></i>
-
-                    <h4 class="mt-3">
-
-                        Emergency Care
-
-                    </h4>
-
-                    <p>
-
-                        24/7 emergency medical support.
-
-                    </p>
-
-
-                </div>
-
-            </div>
-
-
-        </div>
-
-
-    </section>
-
-
-
-
-
-    <!-- Doctors -->
-
-
-    <section class="container py-5">
-
-
-        <h2 class="section-title">
-
-            Our Specialist Doctors
-
-        </h2>
-
-
-        <div class="row g-4">
-
-
-            <div class="col-md-3">
-
-                <div class="card doctor">
-
-
-                    <img src="https://randomuser.me/api/portraits/men/32.jpg">
-
-
-                    <div class="card-body text-center">
-
-                        <h5>Dr. Rajesh Sharma</h5>
-
-                        <p>Cardiologist</p>
-
-
-                    </div>
-
-
-                </div>
-
-            </div>
-
-
-
-            <div class="col-md-3">
-
-                <div class="card doctor">
-
-
-                    <img src="https://randomuser.me/api/portraits/women/44.jpg">
-
-
-                    <div class="card-body text-center">
-
-                        <h5>Dr. Neha Patel</h5>
-
-                        <p>Neurologist</p>
-
-
-                    </div>
-
-
-                </div>
-
-            </div>
-
-
-
-
-            <div class="col-md-3">
-
-                <div class="card doctor">
-
-
-                    <img src="https://randomuser.me/api/portraits/men/46.jpg">
-
-
-                    <div class="card-body text-center">
-
-                        <h5>Dr. Amit Mehta</h5>
-
-                        <p>Orthopedic</p>
-
-
-                    </div>
-
-
-                </div>
-
-            </div>
-
-
-
-
-            <div class="col-md-3">
-
-                <div class="card doctor">
-
-
-                    <img src="https://randomuser.me/api/portraits/women/65.jpg">
-
-
-                    <div class="card-body text-center">
-
-                        <h5>Dr. Riya Joshi</h5>
-
-                        <p>Dermatologist</p>
-
-
-                    </div>
-
-
-                </div>
-
-            </div>
-
-
-        </div>
-
-
-    </section>
-
-
-
-
-
-    <!-- Contact -->
-
-
-    <section class="container py-5">
-
-
-        <div class="contact-box text-center">
-
-
-            <h2>
-
-                Need Emergency Help?
+                Our Healthcare Services
 
             </h2>
 
 
-            <h3>
-
-                <i class="bi bi-telephone-fill"></i> +91 9876543210
-
-            </h3>
+            <div class="row g-4">
 
 
-            <p>
+                <div class="col-md-4 reveal">
 
-                Available 24/7 for patient support
+                    <div class="service-box">
 
-            </p>
+                        <i class="bi bi-heart-pulse"></i>
 
+                        <h4 class="mt-3">
+
+                            Heart Care
+
+                        </h4>
+
+                        <p>
+
+                            Advanced cardiac diagnosis and treatment.
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="col-md-4 reveal">
+
+                    <div class="service-box">
+
+                        <i class="bi bi-robot"></i>
+
+                        <h4 class="mt-3">
+
+                            AI Disease Prediction
+
+                        </h4>
+
+                        <p>
+
+                            Machine learning based health prediction system.
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="col-md-4 reveal">
+
+                    <div class="service-box">
+
+                        <i class="bi bi-hospital"></i>
+
+                        <h4 class="mt-3">
+
+                            Emergency Care
+
+                        </h4>
+
+                        <p>
+
+                            24/7 emergency medical support.
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+            </div>
 
         </div>
-
 
     </section>
 
 
 
+    <!-- ================================
+         DOCTORS
+    ================================= -->
+
+    <section class="doctor-section">
+
+        <div class="container">
+
+            <h2 class="section-title">
+
+                Our Specialist Doctors
+
+            </h2>
 
 
-    <!-- Footer -->
+            <div class="row g-4">
 
+
+                <div class="col-md-3 col-sm-6 reveal">
+
+                    <div class="card doctor">
+
+                        <div class="doctor-image">
+
+                            <img src="https://randomuser.me/api/portraits/men/32.jpg">
+
+                        </div>
+
+                        <div class="card-body text-center">
+
+                            <h5>Dr. Rajesh Sharma</h5>
+
+                            <p>Cardiologist</p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="col-md-3 col-sm-6 reveal">
+
+                    <div class="card doctor">
+
+                        <div class="doctor-image">
+
+                            <img src="https://randomuser.me/api/portraits/women/44.jpg">
+
+                        </div>
+
+                        <div class="card-body text-center">
+
+                            <h5>Dr. Neha Patel</h5>
+
+                            <p>Neurologist</p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="col-md-3 col-sm-6 reveal">
+
+                    <div class="card doctor">
+
+                        <div class="doctor-image">
+
+                            <img src="https://randomuser.me/api/portraits/men/46.jpg">
+
+                        </div>
+
+                        <div class="card-body text-center">
+
+                            <h5>Dr. Amit Mehta</h5>
+
+                            <p>Orthopedic</p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="col-md-3 col-sm-6 reveal">
+
+                    <div class="card doctor">
+
+                        <div class="doctor-image">
+
+                            <img src="https://randomuser.me/api/portraits/women/65.jpg">
+
+                        </div>
+
+                        <div class="card-body text-center">
+
+                            <h5>Dr. Riya Joshi</h5>
+
+                            <p>Dermatologist</p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ================================
+         CONTACT
+    ================================= -->
+
+    <section class="contact-section">
+
+        <div class="container">
+
+            <div class="contact-box text-center reveal">
+
+                <h2>
+
+                    Need Emergency Help?
+
+                </h2>
+
+                <h3>
+
+                    <i class="bi bi-telephone-fill"></i> +91 9876543210
+
+                </h3>
+
+                <p>
+
+                    Available 24/7 for patient support
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ================================
+         FOOTER
+    ================================= -->
 
     <footer class="text-center">
-
 
         <h4>
 
@@ -657,13 +1268,11 @@ Confirm Appointment
 
         </h4>
 
-
         <p>
 
             AI Powered Healthcare Solution Using Machine Learning
 
         </p>
-
 
         <p>
 
@@ -671,14 +1280,45 @@ Confirm Appointment
 
         </p>
 
-
     </footer>
 
 
 
+    <!-- Bootstrap JS -->
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+
+    <!-- Scroll Animation -->
+
+    <script>
+        const revealElements = document.querySelectorAll(".reveal");
+
+        const revealOnScroll = () => {
+
+            revealElements.forEach((element) => {
+
+                const windowHeight = window.innerHeight;
+
+                const elementTop = element.getBoundingClientRect().top;
+
+                if (elementTop < windowHeight - 80) {
+
+                    element.classList.add("show");
+
+                }
+
+            });
+
+        };
+
+        window.addEventListener("scroll", revealOnScroll);
+
+        window.addEventListener("load", revealOnScroll);
+    </script>
 
 
 </body>
 
 </html>
+```
