@@ -2,107 +2,817 @@
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Disease Prediction Summary</title>
+
+    <title>Disease Prediction Summary | Hospital Dashboard</title>
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Bootstrap Icons -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+    <style>
+        /* =====================================================
+           GLOBAL
+        ===================================================== */
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #fff7f7, #f7f9fc);
+            color: #263238;
+            min-height: 100vh;
+        }
+        
+        .main-container {
+            padding: 35px;
+        }
+        /* =====================================================
+           PAGE HEADER
+        ===================================================== */
+        
+        .page-header {
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, #dc3545, #ff6b6b);
+            color: white;
+            padding: 28px 32px;
+            border-radius: 22px;
+            margin-bottom: 30px;
+            box-shadow: 0 12px 35px rgba(220, 53, 69, 0.20);
+        }
+        
+        .page-header::before {
+            content: "";
+            position: absolute;
+            width: 240px;
+            height: 240px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.08);
+            right: -80px;
+            top: -120px;
+        }
+        
+        .page-header::after {
+            content: "";
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.06);
+            right: 120px;
+            bottom: -110px;
+        }
+        
+        .header-content {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+        }
+        
+        .header-icon {
+            width: 65px;
+            height: 65px;
+            border-radius: 18px;
+            background: rgba(255, 255, 255, 0.16);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            margin-right: 18px;
+        }
+        
+        .page-header h2 {
+            font-size: 25px;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+        
+        .page-header p {
+            margin: 0;
+            font-size: 13px;
+            opacity: 0.9;
+        }
+        /* =====================================================
+           SUMMARY CARDS
+        ===================================================== */
+        
+        .summary-card {
+            position: relative;
+            overflow: hidden;
+            background: white;
+            border: none;
+            border-radius: 18px;
+            padding: 22px;
+            height: 100%;
+            box-shadow: 0 8px 28px rgba(0, 0, 0, 0.06);
+            transition: all 0.3s ease;
+        }
+        
+        .summary-card:hover {
+            transform: translateY(-7px);
+            box-shadow: 0 16px 35px rgba(0, 0, 0, 0.10);
+        }
+        
+        .summary-card::after {
+            content: "";
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            right: -35px;
+            bottom: -40px;
+            opacity: 0.08;
+        }
+        
+        .total-card::after {
+            background: #dc3545;
+        }
+        
+        .top-card::after {
+            background: #fd7e14;
+        }
+        
+        .disease-card::after {
+            background: #0d6efd;
+        }
+        
+        .average-card::after {
+            background: #198754;
+        }
+        
+        .summary-icon {
+            width: 52px;
+            height: 52px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 23px;
+            margin-bottom: 14px;
+        }
+        
+        .red-icon {
+            background: #fdebed;
+            color: #dc3545;
+        }
+        
+        .orange-icon {
+            background: #fff1e5;
+            color: #fd7e14;
+        }
+        
+        .blue-icon {
+            background: #eaf2ff;
+            color: #0d6efd;
+        }
+        
+        .green-icon {
+            background: #e8f8f0;
+            color: #198754;
+        }
+        
+        .summary-card h3 {
+            font-size: 29px;
+            font-weight: 700;
+            margin-bottom: 3px;
+        }
+        
+        .summary-card p {
+            color: #7d8992;
+            font-size: 12px;
+            margin: 0;
+        }
+        
+        .summary-label {
+            display: inline-block;
+            margin-top: 9px;
+            padding: 5px 9px;
+            border-radius: 20px;
+            background: #fff1f2;
+            color: #dc3545;
+            font-size: 10px;
+            font-weight: 600;
+        }
+        /* =====================================================
+           MAIN CONTENT CARD
+        ===================================================== */
+        
+        .content-card {
+            background: white;
+            border: none;
+            border-radius: 22px;
+            box-shadow: 0 10px 35px rgba(0, 0, 0, 0.07);
+            overflow: hidden;
+        }
+        
+        .card-header-custom {
+            padding: 22px 25px;
+            border-bottom: 1px solid #edf0f3;
+            background: white;
+        }
+        
+        .title-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+        }
+        
+        .title-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 14px;
+            background: linear-gradient(135deg, #dc3545, #ff6b6b);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            box-shadow: 0 7px 18px rgba(220, 53, 69, 0.20);
+        }
+        
+        .card-header-custom h5 {
+            margin: 0;
+            font-size: 18px;
+            font-weight: 600;
+        }
+        
+        .card-header-custom span {
+            color: #8a969f;
+            font-size: 11px;
+        }
+        /* =====================================================
+           CHART
+        ===================================================== */
+        
+        .chart-body {
+            padding: 25px;
+            height: 410px;
+        }
+        
+        .chart-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+        /* =====================================================
+           TOP DISEASE CARD
+        ===================================================== */
+        
+        .top-disease {
+            padding: 25px;
+            text-align: center;
+        }
+        
+        .top-disease-icon {
+            width: 70px;
+            height: 70px;
+            border-radius: 20px;
+            margin: 0 auto 15px;
+            background: #fff0f1;
+            color: #dc3545;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+        }
+        
+        .top-disease h4 {
+            font-size: 21px;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+        
+        .top-disease p {
+            color: #8a969f;
+            font-size: 12px;
+            margin-bottom: 15px;
+        }
+        
+        .case-number {
+            font-size: 30px;
+            font-weight: 700;
+            color: #dc3545;
+        }
+        
+        .case-text {
+            color: #8a969f;
+            font-size: 11px;
+        }
+        /* =====================================================
+           TABLE
+        ===================================================== */
+        
+        .table-body {
+            padding: 5px 25px 25px;
+        }
+        
+        .table {
+            margin-bottom: 0;
+            vertical-align: middle;
+        }
+        
+        .table thead th {
+            background: #fff3f4;
+            color: #59656e;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+            padding: 15px;
+            border-bottom: 1px solid #f0dfe1;
+        }
+        
+        .table tbody td {
+            padding: 15px;
+            font-size: 12px;
+            color: #4d5a64;
+            border-bottom: 1px solid #f0f2f4;
+        }
+        
+        .table tbody tr {
+            transition: all 0.25s ease;
+        }
+        
+        .table tbody tr:hover {
+            background: #fffafa;
+            transform: scale(1.003);
+        }
+        /* =====================================================
+           DISEASE NAME
+        ===================================================== */
+        
+        .disease-name {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+            color: #263238;
+        }
+        
+        .disease-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            background: #fff1f2;
+            color: #dc3545;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+        }
+        /* =====================================================
+           CASE BADGE
+        ===================================================== */
+        
+        .case-badge {
+            display: inline-block;
+            min-width: 48px;
+            padding: 6px 10px;
+            text-align: center;
+            border-radius: 8px;
+            background: #fff0f1;
+            color: #dc3545;
+            font-size: 11px;
+            font-weight: 700;
+        }
+        /* =====================================================
+           PROGRESS
+        ===================================================== */
+        
+        .progress {
+            height: 7px;
+            border-radius: 20px;
+            background: #f0f2f4;
+        }
+        
+        .progress-bar {
+            border-radius: 20px;
+            background: linear-gradient(90deg, #dc3545, #ff6b6b);
+        }
+        /* =====================================================
+           SEARCH
+        ===================================================== */
+        
+        .search-wrapper {
+            position: relative;
+        }
+        
+        .search-wrapper i {
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #9aa5ad;
+        }
+        
+        .search-input {
+            width: 220px;
+            height: 42px;
+            border: 1px solid #e0e5e8;
+            border-radius: 11px;
+            padding-left: 40px;
+            font-size: 12px;
+        }
+        
+        .search-input:focus {
+            border-color: #dc3545;
+            box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.08);
+        }
+        /* =====================================================
+           STATUS
+        ===================================================== */
+        
+        .severity {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 10px;
+            font-weight: 600;
+            padding: 5px 9px;
+            border-radius: 20px;
+        }
+        
+        .high {
+            background: #fdebed;
+            color: #dc3545;
+        }
+        
+        .medium {
+            background: #fff4df;
+            color: #c98200;
+        }
+        
+        .low {
+            background: #e9f8ef;
+            color: #198754;
+        }
+        
+        .severity-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+        }
+        
+        .high .severity-dot {
+            background: #dc3545;
+        }
+        
+        .medium .severity-dot {
+            background: #ffc107;
+        }
+        
+        .low .severity-dot {
+            background: #198754;
+        }
+        /* =====================================================
+           ANIMATION
+        ===================================================== */
+        
+        .fade-up {
+            animation: fadeUp 0.7s ease both;
+        }
+        
+        .delay-1 {
+            animation-delay: 0.1s;
+        }
+        
+        .delay-2 {
+            animation-delay: 0.2s;
+        }
+        
+        .delay-3 {
+            animation-delay: 0.3s;
+        }
+        
+        .delay-4 {
+            animation-delay: 0.4s;
+        }
+        
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        /* =====================================================
+           RESPONSIVE
+        ===================================================== */
+        
+        @media (max-width: 768px) {
+            .main-container {
+                padding: 18px;
+            }
+            .page-header {
+                padding: 22px;
+            }
+            .page-header h2 {
+                font-size: 21px;
+            }
+            .header-icon {
+                width: 52px;
+                height: 52px;
+                font-size: 24px;
+            }
+            .chart-body {
+                height: 330px;
+                padding: 18px;
+            }
+            .card-header-custom {
+                padding: 18px;
+            }
+            .table-body {
+                padding: 5px 18px 20px;
+            }
+            .search-input {
+                width: 100%;
+            }
+        }
+    </style>
+
 </head>
 
-<body class="bg-light">
 
-    <div class="container-fluid mt-4">
+<body>
 
-        <div class="row justify-content-center">
 
-            <!-- ================= Disease Prediction Summary ================= -->
+    <div class="container-fluid main-container">
+
+
+        <!-- =====================================================
+         PAGE HEADER
+    ====================================================== -->
+
+        <div class="page-header fade-up">
+
+            <div class="header-content">
+
+                <div class="header-icon">
+                    <i class="bi bi-pie-chart-fill"></i>
+                </div>
+
+                <div>
+
+                    <h2>Disease Prediction Summary</h2>
+
+                    <p>
+                        Analyze AI-based disease prediction results and case distribution.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- =====================================================
+         SUMMARY CARDS
+    ====================================================== -->
+
+        <div class="row g-4 mb-4">
+
+
+            <!-- Total Cases -->
+
+            <div class="col-xl-3 col-md-6 fade-up delay-1">
+
+                <div class="summary-card total-card">
+
+                    <div class="summary-icon red-icon">
+                        <i class="bi bi-clipboard2-pulse-fill"></i>
+                    </div>
+
+                    <h3>376</h3>
+
+                    <p>Total Predicted Cases</p>
+
+                    <span class="summary-label">
+                    <i class="bi bi-activity me-1"></i>
+                    All Diseases
+                </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- Top Disease -->
+
+            <div class="col-xl-3 col-md-6 fade-up delay-2">
+
+                <div class="summary-card top-card">
+
+                    <div class="summary-icon orange-icon">
+                        <i class="bi bi-exclamation-triangle-fill"></i>
+                    </div>
+
+                    <h3>85</h3>
+
+                    <p>Highest Cases</p>
+
+                    <span class="summary-label">
+                    Dengue
+                </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- Diseases -->
+
+            <div class="col-xl-3 col-md-6 fade-up delay-3">
+
+                <div class="summary-card disease-card">
+
+                    <div class="summary-icon blue-icon">
+                        <i class="bi bi-virus"></i>
+                    </div>
+
+                    <h3>10</h3>
+
+                    <p>Diseases Detected</p>
+
+                    <span class="summary-label">
+                    Multiple Conditions
+                </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- Average -->
+
+            <div class="col-xl-3 col-md-6 fade-up delay-4">
+
+                <div class="summary-card average-card">
+
+                    <div class="summary-icon green-icon">
+                        <i class="bi bi-graph-up-arrow"></i>
+                    </div>
+
+                    <h3>37.6</h3>
+
+                    <p>Average Cases / Disease</p>
+
+                    <span class="summary-label">
+                    Overall Average
+                </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- =====================================================
+         CHART + TOP DISEASE
+    ====================================================== -->
+
+        <div class="row g-4 mb-4">
+
+
+            <!-- Doughnut Chart -->
 
             <div class="col-lg-8">
 
-                <div class="card shadow">
+                <div class="content-card h-100 fade-up delay-2">
 
-                    <div class="card-header bg-danger text-white">
+                    <div class="card-header-custom">
 
-                        <h5 class="mb-0">
-                            <i class="bi bi-pie-chart-fill"></i> Disease Prediction Summary
-                        </h5>
+                        <div class="d-flex justify-content-between align-items-center">
+
+                            <div class="title-wrapper">
+
+                                <div class="title-icon">
+                                    <i class="bi bi-pie-chart-fill"></i>
+                                </div>
+
+                                <div>
+
+                                    <h5>Disease Distribution</h5>
+
+                                    <span>
+                                    Distribution of predicted disease cases
+                                </span>
+
+                                </div>
+
+                            </div>
+
+                            <span class="badge rounded-pill bg-danger-subtle text-danger px-3 py-2">
+                            376 Cases
+                        </span>
+
+                        </div>
 
                     </div>
 
-                    <div class="card-body">
 
-                        <div class="table-responsive">
+                    <div class="chart-body">
 
-                            <table class="table table-bordered table-hover text-center align-middle">
+                        <div class="chart-container">
 
-                                <thead class="table-danger">
+                            <canvas id="diseaseChart"></canvas>
 
-                                    <tr>
-                                        <th>Disease</th>
-                                        <th>Total Cases</th>
-                                    </tr>
+                        </div>
 
-                                </thead>
+                    </div>
 
-                                <tbody>
+                </div>
 
-                                    <tr>
-                                        <td>Dengue</td>
-                                        <td>85</td>
-                                    </tr>
+            </div>
 
-                                    <tr>
-                                        <td>Diabetes</td>
-                                        <td>62</td>
-                                    </tr>
 
-                                    <tr>
-                                        <td>Heart Disease</td>
-                                        <td>41</td>
-                                    </tr>
+            <!-- Top Disease -->
 
-                                    <tr>
-                                        <td>Typhoid</td>
-                                        <td>35</td>
-                                    </tr>
+            <div class="col-lg-4">
 
-                                    <tr>
-                                        <td>Malaria</td>
-                                        <td>28</td>
-                                    </tr>
+                <div class="content-card h-100 fade-up delay-3">
 
-                                    <tr>
-                                        <td>Viral Fever</td>
-                                        <td>53</td>
-                                    </tr>
+                    <div class="card-header-custom">
 
-                                    <tr>
-                                        <td>Arthritis</td>
-                                        <td>24</td>
-                                    </tr>
+                        <div class="title-wrapper">
 
-                                    <tr>
-                                        <td>Asthma</td>
-                                        <td>19</td>
-                                    </tr>
+                            <div class="title-icon">
 
-                                    <tr>
-                                        <td>Pneumonia</td>
-                                        <td>17</td>
-                                    </tr>
+                                <i class="bi bi-trophy-fill"></i>
 
-                                    <tr>
-                                        <td>COVID-19</td>
-                                        <td>12</td>
-                                    </tr>
+                            </div>
 
-                                </tbody>
+                            <div>
 
-                            </table>
+                                <h5>Top Predicted Disease</h5>
+
+                                <span>Highest number of cases</span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="top-disease">
+
+                        <div class="top-disease-icon">
+
+                            <i class="bi bi-bug-fill"></i>
+
+                        </div>
+
+                        <h4>Dengue</h4>
+
+                        <p>Most frequently predicted condition</p>
+
+                        <div class="case-number">
+                            85
+                        </div>
+
+                        <div class="case-text">
+                            Predicted Cases
+                        </div>
+
+                        <hr>
+
+                        <div class="d-flex justify-content-between small text-muted">
+
+                            <span>Share of cases</span>
+
+                            <strong class="text-danger">
+                            22.6%
+                        </strong>
+
+                        </div>
+
+                        <div class="progress mt-2">
+
+                            <div class="progress-bar" style="width:22.6%;">
+                            </div>
 
                         </div>
 
@@ -114,11 +824,785 @@
 
         </div>
 
+
+        <!-- =====================================================
+         DISEASE TABLE
+    ====================================================== -->
+
+        <div class="content-card fade-up delay-4">
+
+            <div class="card-header-custom">
+
+                <div class="d-flex justify-content-between align-items-center flex-wrap gap-3">
+
+                    <div class="title-wrapper">
+
+                        <div class="title-icon">
+
+                            <i class="bi bi-table"></i>
+
+                        </div>
+
+                        <div>
+
+                            <h5>Disease Prediction Details</h5>
+
+                            <span>
+                            Complete disease-wise prediction statistics
+                        </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="search-wrapper">
+
+                        <i class="bi bi-search"></i>
+
+                        <input type="text" id="diseaseSearch" class="form-control search-input" placeholder="Search disease..." onkeyup="searchDisease()">
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="table-body">
+
+                <div class="table-responsive">
+
+                    <table class="table table-hover" id="diseaseTable">
+
+                        <thead>
+
+                            <tr>
+
+                                <th>#</th>
+
+                                <th>Disease</th>
+
+                                <th>Total Cases</th>
+
+                                <th>Percentage</th>
+
+                                <th>Distribution</th>
+
+                                <th>Level</th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody>
+
+
+                            <!-- Dengue -->
+
+                            <tr>
+
+                                <td>01</td>
+
+                                <td>
+
+                                    <div class="disease-name">
+
+                                        <div class="disease-icon">
+                                            <i class="bi bi-bug-fill"></i>
+                                        </div>
+
+                                        Dengue
+
+                                    </div>
+
+                                </td>
+
+                                <td>
+                                    <span class="case-badge">85</span>
+                                </td>
+
+                                <td>22.6%</td>
+
+                                <td style="min-width:180px;">
+
+                                    <div class="progress">
+
+                                        <div class="progress-bar" style="width:100%;">
+                                        </div>
+
+                                    </div>
+
+                                </td>
+
+                                <td>
+
+                                    <span class="severity high">
+
+                                    <span class="severity-dot"></span> High
+
+                                    </span>
+
+                                </td>
+
+                            </tr>
+
+
+                            <!-- Diabetes -->
+
+                            <tr>
+
+                                <td>02</td>
+
+                                <td>
+
+                                    <div class="disease-name">
+
+                                        <div class="disease-icon">
+                                            <i class="bi bi-droplet-fill"></i>
+                                        </div>
+
+                                        Diabetes
+
+                                    </div>
+
+                                </td>
+
+                                <td>
+                                    <span class="case-badge">62</span>
+                                </td>
+
+                                <td>16.5%</td>
+
+                                <td>
+
+                                    <div class="progress">
+
+                                        <div class="progress-bar" style="width:73%;">
+                                        </div>
+
+                                    </div>
+
+                                </td>
+
+                                <td>
+
+                                    <span class="severity high">
+
+                                    <span class="severity-dot"></span> High
+
+                                    </span>
+
+                                </td>
+
+                            </tr>
+
+
+                            <!-- Heart Disease -->
+
+                            <tr>
+
+                                <td>03</td>
+
+                                <td>
+
+                                    <div class="disease-name">
+
+                                        <div class="disease-icon">
+                                            <i class="bi bi-heart-pulse-fill"></i>
+                                        </div>
+
+                                        Heart Disease
+
+                                    </div>
+
+                                </td>
+
+                                <td>
+                                    <span class="case-badge">41</span>
+                                </td>
+
+                                <td>10.9%</td>
+
+                                <td>
+
+                                    <div class="progress">
+
+                                        <div class="progress-bar" style="width:48%;">
+                                        </div>
+
+                                    </div>
+
+                                </td>
+
+                                <td>
+
+                                    <span class="severity medium">
+
+                                    <span class="severity-dot"></span> Medium
+
+                                    </span>
+
+                                </td>
+
+                            </tr>
+
+
+                            <!-- Typhoid -->
+
+                            <tr>
+
+                                <td>04</td>
+
+                                <td>
+
+                                    <div class="disease-name">
+
+                                        <div class="disease-icon">
+                                            <i class="bi bi-virus"></i>
+                                        </div>
+
+                                        Typhoid
+
+                                    </div>
+
+                                </td>
+
+                                <td>
+                                    <span class="case-badge">35</span>
+                                </td>
+
+                                <td>9.3%</td>
+
+                                <td>
+
+                                    <div class="progress">
+
+                                        <div class="progress-bar" style="width:41%;">
+                                        </div>
+
+                                    </div>
+
+                                </td>
+
+                                <td>
+
+                                    <span class="severity medium">
+
+                                    <span class="severity-dot"></span> Medium
+
+                                    </span>
+
+                                </td>
+
+                            </tr>
+
+
+                            <!-- Malaria -->
+
+                            <tr>
+
+                                <td>05</td>
+
+                                <td>
+
+                                    <div class="disease-name">
+
+                                        <div class="disease-icon">
+                                            <i class="bi bi-bug-fill"></i>
+                                        </div>
+
+                                        Malaria
+
+                                    </div>
+
+                                </td>
+
+                                <td>
+                                    <span class="case-badge">28</span>
+                                </td>
+
+                                <td>7.4%</td>
+
+                                <td>
+
+                                    <div class="progress">
+
+                                        <div class="progress-bar" style="width:33%;">
+                                        </div>
+
+                                    </div>
+
+                                </td>
+
+                                <td>
+
+                                    <span class="severity medium">
+
+                                    <span class="severity-dot"></span> Medium
+
+                                    </span>
+
+                                </td>
+
+                            </tr>
+
+
+                            <!-- Viral Fever -->
+
+                            <tr>
+
+                                <td>06</td>
+
+                                <td>
+
+                                    <div class="disease-name">
+
+                                        <div class="disease-icon">
+                                            <i class="bi bi-thermometer-high"></i>
+                                        </div>
+
+                                        Viral Fever
+
+                                    </div>
+
+                                </td>
+
+                                <td>
+                                    <span class="case-badge">53</span>
+                                </td>
+
+                                <td>14.1%</td>
+
+                                <td>
+
+                                    <div class="progress">
+
+                                        <div class="progress-bar" style="width:62%;">
+                                        </div>
+
+                                    </div>
+
+                                </td>
+
+                                <td>
+
+                                    <span class="severity high">
+
+                                    <span class="severity-dot"></span> High
+
+                                    </span>
+
+                                </td>
+
+                            </tr>
+
+
+                            <!-- Arthritis -->
+
+                            <tr>
+
+                                <td>07</td>
+
+                                <td>
+
+                                    <div class="disease-name">
+
+                                        <div class="disease-icon">
+                                            <i class="bi bi-bandaid-fill"></i>
+                                        </div>
+
+                                        Arthritis
+
+                                    </div>
+
+                                </td>
+
+                                <td>
+                                    <span class="case-badge">24</span>
+                                </td>
+
+                                <td>6.4%</td>
+
+                                <td>
+
+                                    <div class="progress">
+
+                                        <div class="progress-bar" style="width:28%;">
+                                        </div>
+
+                                    </div>
+
+                                </td>
+
+                                <td>
+
+                                    <span class="severity low">
+
+                                    <span class="severity-dot"></span> Low
+
+                                    </span>
+
+                                </td>
+
+                            </tr>
+
+
+                            <!-- Asthma -->
+
+                            <tr>
+
+                                <td>08</td>
+
+                                <td>
+
+                                    <div class="disease-name">
+
+                                        <div class="disease-icon">
+                                            <i class="bi bi-lungs-fill"></i>
+                                        </div>
+
+                                        Asthma
+
+                                    </div>
+
+                                </td>
+
+                                <td>
+                                    <span class="case-badge">19</span>
+                                </td>
+
+                                <td>5.1%</td>
+
+                                <td>
+
+                                    <div class="progress">
+
+                                        <div class="progress-bar" style="width:22%;">
+                                        </div>
+
+                                    </div>
+
+                                </td>
+
+                                <td>
+
+                                    <span class="severity low">
+
+                                    <span class="severity-dot"></span> Low
+
+                                    </span>
+
+                                </td>
+
+                            </tr>
+
+
+                            <!-- Pneumonia -->
+
+                            <tr>
+
+                                <td>09</td>
+
+                                <td>
+
+                                    <div class="disease-name">
+
+                                        <div class="disease-icon">
+                                            <i class="bi bi-lungs-fill"></i>
+                                        </div>
+
+                                        Pneumonia
+
+                                    </div>
+
+                                </td>
+
+                                <td>
+                                    <span class="case-badge">17</span>
+                                </td>
+
+                                <td>4.5%</td>
+
+                                <td>
+
+                                    <div class="progress">
+
+                                        <div class="progress-bar" style="width:20%;">
+                                        </div>
+
+                                    </div>
+
+                                </td>
+
+                                <td>
+
+                                    <span class="severity low">
+
+                                    <span class="severity-dot"></span> Low
+
+                                    </span>
+
+                                </td>
+
+                            </tr>
+
+
+                            <!-- COVID -->
+
+                            <tr>
+
+                                <td>10</td>
+
+                                <td>
+
+                                    <div class="disease-name">
+
+                                        <div class="disease-icon">
+                                            <i class="bi bi-virus2"></i>
+                                        </div>
+
+                                        COVID-19
+
+                                    </div>
+
+                                </td>
+
+                                <td>
+                                    <span class="case-badge">12</span>
+                                </td>
+
+                                <td>3.2%</td>
+
+                                <td>
+
+                                    <div class="progress">
+
+                                        <div class="progress-bar" style="width:14%;">
+                                        </div>
+
+                                    </div>
+
+                                </td>
+
+                                <td>
+
+                                    <span class="severity low">
+
+                                    <span class="severity-dot"></span> Low
+
+                                    </span>
+
+                                </td>
+
+                            </tr>
+
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </div>
+
     </div>
 
-    <!-- Bootstrap JS -->
+
+    <!-- =====================================================
+     BOOTSTRAP JS
+====================================================== -->
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+
+    <script>
+        /* =====================================================
+                               DISEASE DOUGHNUT CHART
+                            ===================================================== */
+
+        const ctx =
+            document
+            .getElementById('diseaseChart')
+            .getContext('2d');
+
+
+        new Chart(ctx, {
+
+            type: 'doughnut',
+
+            data: {
+
+                labels: [
+                    'Dengue',
+                    'Diabetes',
+                    'Heart Disease',
+                    'Typhoid',
+                    'Malaria',
+                    'Viral Fever',
+                    'Arthritis',
+                    'Asthma',
+                    'Pneumonia',
+                    'COVID-19'
+                ],
+
+                datasets: [{
+
+                    data: [
+                        85,
+                        62,
+                        41,
+                        35,
+                        28,
+                        53,
+                        24,
+                        19,
+                        17,
+                        12
+                    ],
+
+                    backgroundColor: [
+                        '#dc3545',
+                        '#0d6efd',
+                        '#198754',
+                        '#fd7e14',
+                        '#6f42c1',
+                        '#20c997',
+                        '#ffc107',
+                        '#6610f2',
+                        '#0dcaf0',
+                        '#6c757d'
+                    ],
+
+                    borderWidth: 3,
+
+                    borderColor: '#ffffff',
+
+                    hoverOffset: 10
+
+                }]
+
+            },
+
+            options: {
+
+                responsive: true,
+
+                maintainAspectRatio: false,
+
+                cutout: '65%',
+
+                plugins: {
+
+                    legend: {
+
+                        position: 'right',
+
+                        labels: {
+
+                            usePointStyle: true,
+
+                            pointStyle: 'circle',
+
+                            padding: 15,
+
+                            font: {
+                                family: 'Poppins',
+                                size: 10
+                            }
+
+                        }
+
+                    },
+
+                    tooltip: {
+
+                        backgroundColor: '#263238',
+
+                        padding: 12,
+
+                        cornerRadius: 10,
+
+                        callbacks: {
+
+                            label: function(context) {
+
+                                let total =
+                                    context.dataset.data
+                                    .reduce(
+                                        (a, b) => a + b,
+                                        0
+                                    );
+
+                                let percentage =
+                                    (
+                                        context.raw /
+                                        total *
+                                        100
+                                    ).toFixed(1);
+
+                                return context.label +
+                                    ': ' +
+                                    context.raw +
+                                    ' cases (' +
+                                    percentage +
+                                    '%)';
+
+                            }
+
+                        }
+
+                    }
+
+                }
+
+            }
+
+        });
+
+
+        /* =====================================================
+           TABLE SEARCH
+        ===================================================== */
+
+        function searchDisease() {
+
+            let input =
+                document
+                .getElementById("diseaseSearch")
+                .value
+                .toLowerCase();
+
+            let rows =
+                document.querySelectorAll(
+                    "#diseaseTable tbody tr"
+                );
+
+            rows.forEach(function(row) {
+
+                let text =
+                    row.innerText.toLowerCase();
+
+                if (text.includes(input)) {
+
+                    row.style.display = "";
+
+                } else {
+
+                    row.style.display = "none";
+
+                }
+
+            });
+
+        }
+    </script>
+
 
 </body>
 
 </html>
+```
