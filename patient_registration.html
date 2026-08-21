@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,15 +6,632 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Patient Registration | Healthcare ML</title>
 
-    <link rel="stylesheet" href="patient_style.css">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        /* =====================================================
+           GLOBAL
+        ===================================================== */
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: "Poppins", sans-serif;
+            background: #f4f9fd;
+            color: #26384d;
+            overflow-x: hidden;
+        }
+        
+        a {
+            text-decoration: none;
+        }
+        /* =====================================================
+           NAVBAR
+        ===================================================== */
+        
+        header {
+            width: 100%;
+            min-height: 78px;
+            background: rgba(255, 255, 255, 0.96);
+            backdrop-filter: blur(15px);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 5%;
+            position: sticky;
+            top: 0;
+            z-index: 999;
+            box-shadow: 0 4px 25px rgba(0, 55, 110, 0.09);
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #0066ff;
+            font-size: 23px;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+        
+        nav {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 4px;
+            flex-wrap: wrap;
+        }
+        
+        nav a {
+            color: #526579;
+            padding: 9px 12px;
+            border-radius: 9px;
+            font-size: 13px;
+            font-weight: 500;
+            transition: 0.3s ease;
+        }
+        
+        nav a:hover {
+            color: #0066ff;
+            background: #edf5ff;
+            transform: translateY(-2px);
+        }
+        
+        nav a:last-child {
+            color: #0066ff;
+            background: #e9f3ff;
+            font-weight: 600;
+        }
+        /* =====================================================
+           BANNER
+        ===================================================== */
+        
+        .banner {
+            min-height: 400px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            background: linear-gradient( 135deg, rgba(0, 48, 120, 0.94), rgba(0, 119, 255, 0.82)), url("https://images.unsplash.com/photo-1576091160399-112ba8d25d1d");
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .banner::before {
+            content: "";
+            width: 420px;
+            height: 420px;
+            border: 1px solid rgba(255, 255, 255, 0.16);
+            border-radius: 50%;
+            position: absolute;
+            left: -170px;
+            top: -250px;
+            animation: rotate 18s linear infinite;
+        }
+        
+        .banner::after {
+            content: "";
+            width: 520px;
+            height: 520px;
+            border: 1px solid rgba(255, 255, 255, 0.13);
+            border-radius: 50%;
+            position: absolute;
+            right: -260px;
+            bottom: -300px;
+            animation: rotate 20s linear infinite reverse;
+        }
+        
+        @keyframes rotate {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+        
+        .banner-content {
+            position: relative;
+            z-index: 2;
+            animation: bannerShow 1s ease;
+        }
+        
+        @keyframes bannerShow {
+            from {
+                opacity: 0;
+                transform: translateY(35px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .banner-icon {
+            width: 82px;
+            height: 82px;
+            margin: 0 auto 22px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 24px;
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(10px);
+            font-size: 40px;
+            animation: floating 3s ease-in-out infinite;
+        }
+        
+        @keyframes floating {
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-9px);
+            }
+        }
+        
+        .banner h1 {
+            font-size: clamp(38px, 6vw, 58px);
+            font-weight: 800;
+            letter-spacing: -1px;
+            margin-bottom: 13px;
+        }
+        
+        .banner p {
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.91);
+        }
+        /* =====================================================
+           REGISTRATION SECTION
+        ===================================================== */
+        
+        .registration {
+            padding: 80px 20px;
+            position: relative;
+        }
+        
+        .register-box {
+            max-width: 1050px;
+            margin: auto;
+            background: white;
+            border: 1px solid #e0ebf5;
+            border-radius: 30px;
+            padding: 48px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 30px 70px rgba(0, 67, 130, 0.11), 0 5px 20px rgba(0, 0, 0, 0.03);
+            animation: formAppear 0.9s ease;
+        }
+        
+        @keyframes formAppear {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .register-box::before {
+            content: "";
+            width: 240px;
+            height: 240px;
+            border-radius: 50%;
+            background: #edf6ff;
+            position: absolute;
+            right: -100px;
+            top: -120px;
+        }
+        
+        .register-box::after {
+            content: "";
+            width: 170px;
+            height: 170px;
+            border-radius: 50%;
+            background: #f3f9ff;
+            position: absolute;
+            left: -90px;
+            bottom: -100px;
+        }
+        
+        .register-box h2 {
+            text-align: center;
+            font-size: 30px;
+            color: #123d68;
+            font-weight: 700;
+            margin-bottom: 40px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .register-box h2::after {
+            content: "";
+            display: block;
+            width: 65px;
+            height: 4px;
+            border-radius: 10px;
+            background: linear-gradient(90deg, #0066ff, #00bfff);
+            margin: 14px auto 0;
+        }
+        /* =====================================================
+           FORM GRID
+        ===================================================== */
+        
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .input-box {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .input-box.full {
+            grid-column: span 2;
+        }
+        
+        .input-box label {
+            font-size: 14px;
+            font-weight: 600;
+            color: #354b61;
+            margin-bottom: 9px;
+        }
+        
+        .input-box input,
+        .input-box select,
+        .input-box textarea {
+            width: 100%;
+            border: 1px solid #d7e5f0;
+            background: #fbfdff;
+            border-radius: 13px;
+            padding: 13px 16px;
+            font-family: "Poppins", sans-serif;
+            color: #354b61;
+            font-size: 14px;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+        
+        .input-box input,
+        .input-box select {
+            height: 53px;
+        }
+        
+        .input-box textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+        
+        .input-box input::placeholder,
+        .input-box textarea::placeholder {
+            color: #9aaaba;
+        }
+        
+        .input-box input:hover,
+        .input-box select:hover,
+        .input-box textarea:hover {
+            border-color: #a9c9e8;
+            background: white;
+        }
+        
+        .input-box input:focus,
+        .input-box select:focus,
+        .input-box textarea:focus {
+            border-color: #0066ff;
+            background: white;
+            box-shadow: 0 0 0 4px rgba(0, 102, 255, 0.08);
+        }
+        /* =====================================================
+           CHECKBOX
+        ===================================================== */
+        
+        .check {
+            position: relative;
+            z-index: 2;
+            margin: 25px 0;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-radius: 13px;
+            border: 1px solid #dfebf5;
+            background: #f5faff;
+            color: #63768a;
+            font-size: 13px;
+        }
+        
+        .check input {
+            width: 17px;
+            height: 17px;
+            accent-color: #0066ff;
+            cursor: pointer;
+        }
+        /* =====================================================
+           REGISTER BUTTON
+        ===================================================== */
+        
+        .register-box button {
+            width: 100%;
+            border: none;
+            border-radius: 14px;
+            padding: 16px;
+            background: linear-gradient(135deg, #0066ff, #008cff);
+            color: white;
+            font-family: "Poppins", sans-serif;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            position: relative;
+            z-index: 2;
+            box-shadow: 0 12px 30px rgba(0, 102, 255, 0.22);
+            transition: all 0.3s ease;
+        }
+        
+        .register-box button:hover {
+            transform: translateY(-3px);
+            background: linear-gradient(135deg, #0053d5, #0079e8);
+            box-shadow: 0 18px 38px rgba(0, 102, 255, 0.30);
+        }
+        
+        .register-box button:active {
+            transform: translateY(0);
+        }
+        /* =====================================================
+           LOGIN
+        ===================================================== */
+        
+        .login {
+            text-align: center;
+            margin-top: 22px;
+            color: #728397;
+            font-size: 14px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .login a {
+            color: #0066ff;
+            font-weight: 600;
+            transition: 0.3s ease;
+        }
+        
+        .login a:hover {
+            color: #0047b3;
+            text-decoration: underline;
+        }
+        /* =====================================================
+           INFO CARDS
+        ===================================================== */
+        
+        .info {
+            max-width: 1100px;
+            margin: 0 auto 80px;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+        
+        .info>div {
+            background: white;
+            border: 1px solid #dfebf5;
+            border-radius: 22px;
+            padding: 32px 25px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 12px 35px rgba(0, 60, 120, 0.07);
+            transition: all 0.4s ease;
+        }
+        
+        .info>div::before {
+            content: "";
+            position: absolute;
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            background: #edf6ff;
+            right: -50px;
+            top: -50px;
+        }
+        
+        .info>div:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 22px 45px rgba(0, 70, 140, 0.13);
+        }
+        
+        .info h3 {
+            position: relative;
+            z-index: 2;
+            color: #163f68;
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+        
+        .info p {
+            position: relative;
+            z-index: 2;
+            color: #718096;
+            font-size: 13px;
+            line-height: 1.8;
+            margin: 0;
+        }
+        /* =====================================================
+           FOOTER
+        ===================================================== */
+        
+        footer {
+            position: relative;
+            background: #062b59;
+            color: white;
+            text-align: center;
+            padding: 45px 20px;
+        }
+        
+        footer::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient( 90deg, #0066ff, #00c6ff, #0066ff);
+        }
+        
+        footer h3 {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+        
+        footer p {
+            color: rgba(255, 255, 255, 0.68);
+            font-size: 13px;
+            margin-bottom: 7px;
+        }
+        /* =====================================================
+           TABLET
+        ===================================================== */
+        
+        @media (max-width: 1050px) {
+            header {
+                padding: 15px 3%;
+            }
+            nav a {
+                font-size: 12px;
+                padding: 8px 8px;
+            }
+        }
+        /* =====================================================
+           MOBILE
+        ===================================================== */
+        
+        @media (max-width: 850px) {
+            header {
+                flex-direction: column;
+                gap: 12px;
+                padding: 16px 20px;
+            }
+            nav {
+                justify-content: center;
+            }
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+            .input-box.full {
+                grid-column: span 1;
+            }
+            .info {
+                grid-template-columns: 1fr;
+                max-width: 550px;
+            }
+        }
+        
+        @media (max-width: 600px) {
+            header {
+                position: relative;
+            }
+            .logo {
+                font-size: 21px;
+            }
+            nav {
+                gap: 3px;
+            }
+            nav a {
+                font-size: 10px;
+                padding: 7px 6px;
+            }
+            .banner {
+                min-height: 350px;
+                padding: 55px 20px;
+            }
+            .banner-icon {
+                width: 68px;
+                height: 68px;
+                font-size: 32px;
+            }
+            .banner h1 {
+                font-size: 36px;
+            }
+            .banner p {
+                font-size: 13px;
+            }
+            .registration {
+                padding: 55px 15px;
+            }
+            .register-box {
+                padding: 28px 18px;
+                border-radius: 23px;
+            }
+            .register-box h2 {
+                font-size: 25px;
+            }
+            .form-grid {
+                gap: 18px;
+            }
+            .info {
+                padding: 0 15px;
+                margin-bottom: 55px;
+            }
+        }
+        
+        @media (max-width: 400px) {
+            nav a {
+                font-size: 9px;
+                padding: 6px 4px;
+            }
+            .banner h1 {
+                font-size: 30px;
+            }
+            .banner p {
+                font-size: 12px;
+            }
+            .register-box {
+                padding: 23px 14px;
+            }
+            .check {
+                font-size: 12px;
+            }
+        }
+    </style>
 
 </head>
 
 
 <body>
 
+
+    <!-- =====================================================
+         HEADER
+    ===================================================== -->
 
     <header>
 
@@ -25,15 +643,22 @@
         <nav>
 
             <a href="index.html">Home</a>
+
             <a href="About.html">About</a>
+
             <a href="departments.html">Department</a>
+
             <a href="doctors.html">doctor</a>
 
             <a href="predict.html">Disease Prediction</a>
-            <a href="appointment.html">Appointment</a>
-            <a href="admin_login.html">Admin Login</a>
-            <a href="patient_registration.html">patient Registration</a>
 
+            <a href="appointment.html">Appointment</a>
+
+            <a href="admin_login.html">Admin Login</a>
+
+            <a href="patient_registration.html">
+                patient Registration
+            </a>
 
         </nav>
 
@@ -41,19 +666,35 @@
 
 
 
+    <!-- =====================================================
+         BANNER
+    ===================================================== -->
+
     <section class="banner">
 
-        <h1>Patient Registration</h1>
+        <div class="banner-content">
 
-        <p>
-            Register yourself and access AI powered healthcare services
-        </p>
+            <div class="banner-icon">
+
+                <i class="bi bi-person-plus-fill"></i>
+
+            </div>
+
+            <h1>Patient Registration</h1>
+
+            <p>
+                Register yourself and access AI powered healthcare services
+            </p>
+
+        </div>
 
     </section>
 
 
 
-
+    <!-- =====================================================
+         REGISTRATION
+    ===================================================== -->
 
     <section class="registration">
 
@@ -93,7 +734,6 @@
 
 
 
-
                     <div class="input-box">
 
                         <label>Email Address</label>
@@ -101,7 +741,6 @@
                         <input type="email" placeholder="Enter Email" required>
 
                     </div>
-
 
 
 
@@ -115,25 +754,25 @@
 
 
 
-
                     <div class="input-box">
 
                         <label>Gender</label>
 
                         <select>
 
-<option>Select Gender</option>
+                            <option selected disabled>
+                                Select Gender
+                            </option>
 
-<option>Male</option>
+                            <option>Male</option>
 
-<option>Female</option>
+                            <option>Female</option>
 
-<option>Other</option>
+                            <option>Other</option>
 
-</select>
+                        </select>
 
                     </div>
-
 
 
 
@@ -143,28 +782,29 @@
 
                         <select>
 
-<option>Select Blood Group</option>
+                            <option selected disabled>
+                                Select Blood Group
+                            </option>
 
-<option>A+</option>
+                            <option>A+</option>
 
-<option>A-</option>
+                            <option>A-</option>
 
-<option>B+</option>
+                            <option>B+</option>
 
-<option>B-</option>
+                            <option>B-</option>
 
-<option>O+</option>
+                            <option>AB+</option>
 
-<option>O-</option>
+                            <option>AB-</option>
 
-<option>AB+</option>
+                            <option>O+</option>
 
-<option>AB-</option>
+                            <option>O-</option>
 
-</select>
+                        </select>
 
                     </div>
-
 
 
 
@@ -188,7 +828,6 @@
 
 
 
-
                     <div class="input-box full">
 
                         <label>Previous Medical History</label>
@@ -196,7 +835,6 @@
                         <textarea rows="4" placeholder="Any previous disease, surgery or medication"></textarea>
 
                     </div>
-
 
 
 
@@ -210,7 +848,6 @@
 
 
 
-
                     <div class="input-box">
 
                         <label>Confirm Password</label>
@@ -220,9 +857,7 @@
                     </div>
 
 
-
                 </div>
-
 
 
 
@@ -234,22 +869,23 @@
 
 
 
+                <button type="button" onclick="window.location.href='index.html';">
 
-                <button type="submit">
+                    Register Patient
 
-Register Patient
-
-</button>
+                </button>
 
 
 
                 <p class="login">
 
                     Already have account?
-                    <a href="patient_login.html">Login Here</a>
+
+                    <a href="patient_login.html">
+                        Login Here
+                    </a>
 
                 </p>
-
 
 
             </form>
@@ -262,7 +898,9 @@ Register Patient
 
 
 
-
+    <!-- =====================================================
+         INFORMATION
+    ===================================================== -->
 
     <section class="info">
 
@@ -306,7 +944,9 @@ Register Patient
 
 
 
-
+    <!-- =====================================================
+         FOOTER
+    ===================================================== -->
 
     <footer>
 
@@ -329,7 +969,7 @@ Register Patient
     </footer>
 
 
-
 </body>
 
 </html>
+```
