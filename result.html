@@ -1,73 +1,690 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Disease Prediction Result</title>
 
+    <title>Disease Prediction Result | Healthcare Disease Prediction System</title>
+
+    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
 
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+
     <style>
-        body {
-            background: #f5f8fc;
-            font-family: Arial, Helvetica, sans-serif;
+        /* =====================================================
+           GLOBAL
+        ====================================================== */
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            background: #f3f8fd;
+            font-family: "Poppins", sans-serif;
+            color: #243b53;
+            overflow-x: hidden;
+        }
+        
+         ::selection {
+            background: #0d6efd;
+            color: #ffffff;
+        }
+        /* =====================================================
+           NAVBAR
+        ====================================================== */
         
         .navbar {
-            box-shadow: 0 2px 10px rgba(0, 0, 0, .1);
+            background: rgba(255, 255, 255, 0.96) !important;
+            backdrop-filter: blur(15px);
+            box-shadow: 0 5px 25px rgba(13, 67, 120, 0.08);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 999;
         }
+        
+        .navbar-brand {
+            font-size: 23px;
+            color: #0d6efd !important;
+            letter-spacing: -0.5px;
+            transition: 0.3s ease;
+        }
+        
+        .navbar-brand:hover {
+            transform: translateY(-2px);
+        }
+        
+        .navbar-brand i {
+            font-size: 29px;
+            margin-right: 6px;
+            animation: heartbeat 1.8s infinite;
+        }
+        
+        @keyframes heartbeat {
+            0%,
+            100% {
+                transform: scale(1);
+            }
+            15% {
+                transform: scale(1.15);
+            }
+            30% {
+                transform: scale(1);
+            }
+            45% {
+                transform: scale(1.1);
+            }
+        }
+        
+        .home-btn {
+            border-radius: 30px;
+            padding: 9px 22px;
+            font-weight: 600;
+            transition: 0.3s ease;
+        }
+        
+        .home-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(13, 110, 253, 0.18);
+        }
+        /* =====================================================
+           HERO / BANNER
+        ====================================================== */
         
         .banner {
-            background: linear-gradient(rgba(13, 110, 253, .9), rgba(13, 110, 253, .9));
-            color: white;
-            padding: 50px 0;
+            min-height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             text-align: center;
+            color: white;
+            background: linear-gradient( 135deg, rgba(3, 60, 145, 0.95), rgba(13, 110, 253, 0.88)), url("https://images.unsplash.com/photo-1576091160399-112ba8d25d1d");
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            overflow: hidden;
         }
+        
+        .banner::before {
+            content: "";
+            position: absolute;
+            width: 420px;
+            height: 420px;
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            border-radius: 50%;
+            top: -220px;
+            left: -120px;
+            animation: rotateCircle 18s linear infinite;
+        }
+        
+        .banner::after {
+            content: "";
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 50%;
+            right: -240px;
+            bottom: -300px;
+            animation: rotateCircle 22s linear infinite reverse;
+        }
+        
+        @keyframes rotateCircle {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+        
+        .banner-content {
+            position: relative;
+            z-index: 2;
+            animation: bannerAppear 1s ease;
+        }
+        
+        @keyframes bannerAppear {
+            from {
+                opacity: 0;
+                transform: translateY(35px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .banner-icon {
+            width: 85px;
+            height: 85px;
+            border-radius: 25px;
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto 25px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.16);
+        }
+        
+        .banner-icon i {
+            font-size: 43px;
+        }
+        
+        .banner h1 {
+            font-size: clamp(35px, 6vw, 58px);
+            font-weight: 800;
+            margin-bottom: 15px;
+            letter-spacing: -1px;
+        }
+        
+        .banner p {
+            font-size: 17px;
+            color: rgba(255, 255, 255, 0.88);
+            margin-bottom: 0;
+        }
+        /* =====================================================
+           MAIN CONTAINER
+        ====================================================== */
+        
+        .main-container {
+            max-width: 1100px;
+        }
+        /* =====================================================
+           CARDS
+        ====================================================== */
         
         .card {
-            border: none;
-            border-radius: 12px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, .08);
-            margin-bottom: 20px;
+            border: 1px solid #e1ebf5;
+            border-radius: 22px;
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 10px 35px rgba(21, 74, 125, 0.07);
+            margin-bottom: 25px;
+            transition: all 0.4s ease;
         }
         
-        .footer {
-            background: #0d6efd;
-            color: white;
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 18px 45px rgba(21, 74, 125, 0.12);
+        }
+        
+        .card-header {
+            border: none;
+            padding: 18px 24px;
+            font-size: 16px;
+            font-weight: 600;
+            letter-spacing: 0.2px;
+        }
+        
+        .card-body {
             padding: 25px;
-            margin-top: 40px;
+        }
+        /* =====================================================
+           PATIENT INFORMATION
+        ====================================================== */
+        
+        .patient-info {
+            background: linear-gradient(135deg, #ffffff, #f7fbff);
+        }
+        
+        .patient-row {
+            padding: 13px 0;
+            border-bottom: 1px dashed #dce8f3;
+        }
+        
+        .patient-row:last-child {
+            border-bottom: none;
+        }
+        
+        .patient-row b {
+            color: #52708e;
+            font-weight: 600;
+        }
+        
+        .patient-value {
+            color: #173b62;
+            font-weight: 500;
+        }
+        
+        .patient-icon {
+            width: 42px;
+            height: 42px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            background: #eaf3ff;
+            color: #0d6efd;
+            margin-right: 10px;
+        }
+        /* =====================================================
+           SYMPTOMS
+        ====================================================== */
+        
+        .symptoms-card .card-body {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .symptom-badge {
+            padding: 10px 16px;
+            border-radius: 30px;
+            font-size: 13px;
+            font-weight: 600;
+            box-shadow: 0 5px 12px rgba(0, 0, 0, 0.06);
+        }
+        /* =====================================================
+           PREDICTION
+        ====================================================== */
+        
+        .prediction-card {
+            border: 1px solid #d8f0df;
+        }
+        
+        .prediction-result {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 5px 0 20px;
+        }
+        
+        .prediction-icon {
+            width: 75px;
+            height: 75px;
+            min-width: 75px;
+            border-radius: 20px;
+            background: #e8f8ed;
+            color: #198754;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 38px;
+            animation: pulseSuccess 2s infinite;
+        }
+        
+        @keyframes pulseSuccess {
+            0% {
+                box-shadow: 0 0 0 0 rgba(25, 135, 84, 0.20);
+            }
+            70% {
+                box-shadow: 0 0 0 14px rgba(25, 135, 84, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(25, 135, 84, 0);
+            }
+        }
+        
+        .prediction-result h3 {
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+        
+        .prediction-label {
+            color: #78909c;
+            font-size: 13px;
+        }
+        
+        .confidence-box {
+            background: #f5fbf7;
+            border: 1px solid #dff1e5;
+            padding: 18px;
+            border-radius: 15px;
+        }
+        
+        .confidence-title {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-size: 13px;
+            font-weight: 600;
+            color: #537064;
+        }
+        
+        .progress {
+            height: 14px;
+            border-radius: 20px;
+            background: #e7f1ea;
+            overflow: hidden;
+        }
+        
+        .progress-bar {
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 700;
+        }
+        /* =====================================================
+           DESCRIPTION
+        ====================================================== */
+        
+        .description-box {
+            background: #f4fbff;
+            border-left: 5px solid #0dcaf0;
+            border-radius: 12px;
+            padding: 20px;
+        }
+        
+        .description-box p {
+            margin: 0;
+            line-height: 1.9;
+            color: #526b80;
+            font-size: 14px;
+        }
+        /* =====================================================
+           RECOMMENDED DEPARTMENT
+        ====================================================== */
+        
+        .department-content {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .department-icon {
+            width: 65px;
+            height: 65px;
+            min-width: 65px;
+            background: #fff4d8;
+            color: #d39e00;
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+        }
+        
+        .department-content h4 {
+            color: #3a4650;
+            font-weight: 700;
+            margin-bottom: 7px;
+        }
+        
+        .department-content p {
+            color: #687b8d;
+            font-size: 14px;
+            margin-bottom: 0;
+        }
+        /* =====================================================
+           TESTS & PREVENTION
+        ====================================================== */
+        
+        .custom-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .custom-list li {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 0;
+            border-bottom: 1px dashed #dce8f3;
+            color: #526b80;
+            font-size: 14px;
+        }
+        
+        .custom-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .custom-list li i {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #eaf3ff;
+            color: #0d6efd;
+            flex-shrink: 0;
+        }
+        
+        .prevention-list li i {
+            background: #e8f8ed;
+            color: #198754;
+        }
+        /* =====================================================
+           BUTTON AREA
+        ====================================================== */
+        
+        .action-area {
+            background: white;
+            border-radius: 22px;
+            padding: 28px;
+            box-shadow: 0 10px 35px rgba(21, 74, 125, 0.07);
+            margin-top: 10px;
+        }
+        
+        .action-area .btn {
+            border-radius: 13px;
+            padding: 13px 24px;
+            font-weight: 600;
+            margin: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .action-area .btn:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 22px rgba(0, 0, 0, 0.12);
+        }
+        
+        .print-btn {
+            background: linear-gradient(135deg, #0d6efd, #3987ff);
+            border: none;
+        }
+        
+        .appointment-btn {
+            background: linear-gradient(135deg, #198754, #35b875);
+            border: none;
+        }
+        
+        .predict-btn {
+            background: linear-gradient(135deg, #dc3545, #ef5a68);
+            border: none;
+        }
+        /* =====================================================
+           FOOTER
+        ====================================================== */
+        
+        .footer {
+            background: #062b59;
+            color: white;
+            padding: 50px 20px 35px;
+            margin-top: 70px;
+            position: relative;
+        }
+        
+        .footer::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient( 90deg, #0d6efd, #00c6ff, #0d6efd);
+        }
+        
+        .footer h4 {
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+        
+        .footer p {
+            color: rgba(255, 255, 255, 0.68);
+            font-size: 14px;
+            margin-bottom: 7px;
+        }
+        /* =====================================================
+           SCROLL REVEAL
+        ====================================================== */
+        
+        .reveal {
+            opacity: 0;
+            transform: translateY(35px);
+            transition: all 0.8s ease;
+        }
+        
+        .reveal.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        /* =====================================================
+           PRINT DESIGN
+        ====================================================== */
+        
+        @media print {
+            .navbar,
+            .banner,
+            .action-area,
+            .footer {
+                display: none !important;
+            }
+            body {
+                background: white;
+            }
+            .container {
+                max-width: 100%;
+            }
+            .card {
+                box-shadow: none;
+                border: 1px solid #ddd;
+                page-break-inside: avoid;
+            }
+            .card:hover {
+                transform: none;
+            }
+        }
+        /* =====================================================
+           RESPONSIVE
+        ====================================================== */
+        
+        @media (max-width: 768px) {
+            .navbar-brand {
+                font-size: 19px;
+            }
+            .banner {
+                min-height: 350px;
+            }
+            .banner h1 {
+                font-size: 38px;
+            }
+            .banner p {
+                font-size: 14px;
+            }
+            .banner-icon {
+                width: 70px;
+                height: 70px;
+            }
+            .banner-icon i {
+                font-size: 34px;
+            }
+            .card-body {
+                padding: 20px;
+            }
+            .prediction-result {
+                align-items: flex-start;
+            }
+            .department-content {
+                align-items: flex-start;
+            }
+            .action-area {
+                padding: 20px 10px;
+            }
+            .action-area .btn {
+                width: 100%;
+                margin: 5px 0;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .banner h1 {
+                font-size: 32px;
+            }
+            .banner p {
+                font-size: 13px;
+            }
+            .prediction-result {
+                flex-direction: column;
+            }
+            .department-content {
+                flex-direction: column;
+            }
+            .patient-row {
+                font-size: 13px;
+            }
         }
     </style>
 
 </head>
 
+
 <body>
 
-    <!-- Navbar -->
+
+    <!-- =====================================================
+         NAVBAR
+    ====================================================== -->
 
     <nav class="navbar navbar-expand-lg navbar-light bg-white">
 
         <div class="container">
 
             <a class="navbar-brand fw-bold text-primary" href="index.html">
+
                 <i class="bi bi-heart-pulse-fill"></i> Healthcare ML
+
             </a>
 
+
             <div class="ms-auto">
-                <a href="index.html" class="btn btn-outline-primary">Home</a>
+
+                <a href="index.html" class="btn btn-outline-primary home-btn">
+
+                    <i class="bi bi-house-door-fill me-1"></i> Home
+
+                </a>
+
             </div>
 
         </div>
 
     </nav>
 
-    <!-- Banner -->
+
+
+    <!-- =====================================================
+         BANNER
+    ====================================================== -->
 
     <section class="banner">
 
-        <div class="container">
+        <div class="banner-content">
+
+            <div class="banner-icon">
+
+                <i class="bi bi-clipboard2-pulse"></i>
+
+            </div>
 
             <h1>Disease Prediction Result</h1>
 
@@ -77,34 +694,104 @@
 
     </section>
 
-    <div class="container py-5">
 
-        <!-- Patient Information -->
 
-        <div class="card">
+    <!-- =====================================================
+         MAIN CONTENT
+    ====================================================== -->
+
+    <div class="container main-container py-5">
+
+
+        <!-- =================================================
+             PATIENT INFORMATION
+        ================================================== -->
+
+        <div class="card patient-info reveal">
 
             <div class="card-header bg-primary text-white">
-                Patient Information
+
+                <i class="bi bi-person-vcard-fill me-2"></i> Patient Information
+
             </div>
 
             <div class="card-body">
 
                 <div class="row">
 
-                    <div class="col-md-6">
-                        <b>Name:</b> Ankit Patel
+                    <div class="col-md-6 patient-row">
+
+                        <span class="patient-icon">
+
+                            <i class="bi bi-person-fill"></i>
+
+                        </span>
+
+                        <b>Name:</b>
+
+                        <span class="patient-value">
+
+                            Ankit Patel
+
+                        </span>
+
                     </div>
 
-                    <div class="col-md-6">
-                        <b>Age:</b> 22
+
+                    <div class="col-md-6 patient-row">
+
+                        <span class="patient-icon">
+
+                            <i class="bi bi-calendar3"></i>
+
+                        </span>
+
+                        <b>Age:</b>
+
+                        <span class="patient-value">
+
+                            22
+
+                        </span>
+
                     </div>
 
-                    <div class="col-md-6 mt-2">
-                        <b>Gender:</b> Male
+
+                    <div class="col-md-6 patient-row mt-2">
+
+                        <span class="patient-icon">
+
+                            <i class="bi bi-gender-male"></i>
+
+                        </span>
+
+                        <b>Gender:</b>
+
+                        <span class="patient-value">
+
+                            Male
+
+                        </span>
+
                     </div>
 
-                    <div class="col-md-6 mt-2">
-                        <b>Date:</b> 21 July 2026
+
+                    <div class="col-md-6 patient-row mt-2">
+
+                        <span class="patient-icon">
+
+                            <i class="bi bi-calendar-event"></i>
+
+                        </span>
+
+                        <b>Date:</b>
+
+                        <span class="patient-value">
+
+                            21 July 2026
+
+                        </span>
+
                     </div>
 
                 </div>
@@ -113,51 +800,126 @@
 
         </div>
 
-        <!-- Symptoms -->
 
-        <div class="card">
+
+        <!-- =================================================
+             SYMPTOMS
+        ================================================== -->
+
+        <div class="card symptoms-card reveal">
 
             <div class="card-header bg-secondary text-white">
-                Selected Symptoms
+
+                <i class="bi bi-activity me-2"></i> Selected Symptoms
+
             </div>
 
             <div class="card-body">
 
-                <span class="badge bg-danger">Fever</span>
+                <span class="badge bg-danger symptom-badge">
 
-                <span class="badge bg-warning text-dark">Headache</span>
+                    <i class="bi bi-thermometer-high me-1"></i>
 
-                <span class="badge bg-info text-dark">Vomiting</span>
+                    Fever
 
-                <span class="badge bg-success">Fatigue</span>
+                </span>
 
-                <span class="badge bg-primary">Body Pain</span>
+                <span class="badge bg-warning text-dark symptom-badge">
+
+                    <i class="bi bi-headphones me-1"></i>
+
+                    Headache
+
+                </span>
+
+                <span class="badge bg-info text-dark symptom-badge">
+
+                    <i class="bi bi-emoji-frown me-1"></i>
+
+                    Vomiting
+
+                </span>
+
+                <span class="badge bg-success symptom-badge">
+
+                    <i class="bi bi-battery-half me-1"></i>
+
+                    Fatigue
+
+                </span>
+
+                <span class="badge bg-primary symptom-badge">
+
+                    <i class="bi bi-person-fill me-1"></i>
+
+                    Body Pain
+
+                </span>
 
             </div>
 
         </div>
 
-        <!-- Prediction -->
 
-        <div class="card">
+
+        <!-- =================================================
+             PREDICTION
+        ================================================== -->
+
+        <div class="card prediction-card reveal">
 
             <div class="card-header bg-success text-white">
-                Prediction
+
+                <i class="bi bi-robot me-2"></i> Prediction
+
             </div>
 
             <div class="card-body">
 
-                <h3 class="text-success">
+                <div class="prediction-result">
 
-                    Dengue Fever
+                    <div class="prediction-icon">
 
-                </h3>
+                        <i class="bi bi-shield-check"></i>
 
-                <div class="progress mt-3">
+                    </div>
 
-                    <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" style="width:96%;">
+                    <div>
 
-                        96%
+                        <div class="prediction-label">
+
+                            Predicted Disease
+
+                        </div>
+
+                        <h3 class="text-success">
+
+                            Dengue Fever
+
+                        </h3>
+
+                    </div>
+
+                </div>
+
+
+                <div class="confidence-box">
+
+                    <div class="confidence-title">
+
+                        <span>Prediction Confidence</span>
+
+                        <span>96%</span>
+
+                    </div>
+
+                    <div class="progress">
+
+                        <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" style="width:96%;">
+
+                            96%
+
+                        </div>
 
                     </div>
 
@@ -167,71 +929,123 @@
 
         </div>
 
-        <!-- Disease Description -->
 
-        <div class="card">
+
+        <!-- =================================================
+             DISEASE DESCRIPTION
+        ================================================== -->
+
+        <div class="card reveal">
 
             <div class="card-header bg-info text-white">
-                Disease Description
+
+                <i class="bi bi-info-circle-fill me-2"></i> Disease Description
+
             </div>
 
             <div class="card-body">
 
-                <p>
+                <div class="description-box">
 
-                    Dengue is a mosquito-borne viral disease that causes high fever, headache, muscle pain, nausea and weakness.
+                    <p>
 
-                </p>
+                        Dengue is a mosquito-borne viral disease that causes high fever, headache, muscle pain, nausea and weakness.
+
+                    </p>
+
+                </div>
 
             </div>
 
         </div>
 
-        <!-- Recommended Department -->
 
-        <div class="card">
+
+        <!-- =================================================
+             RECOMMENDED DEPARTMENT
+        ================================================== -->
+
+        <div class="card reveal">
 
             <div class="card-header bg-warning">
-                Recommended Department
+
+                <i class="bi bi-hospital-fill me-2"></i> Recommended Department
+
             </div>
 
             <div class="card-body">
 
-                <h4>
+                <div class="department-content">
 
-                    General Medicine
+                    <div class="department-icon">
 
-                </h4>
+                        <i class="bi bi-heart-pulse-fill"></i>
 
-                <p>
+                    </div>
 
-                    Consult a physician immediately for proper diagnosis.
+                    <div>
 
-                </p>
+                        <h4>
+
+                            General Medicine
+
+                        </h4>
+
+                        <p>
+
+                            Consult a physician immediately for proper diagnosis.
+
+                        </p>
+
+                    </div>
+
+                </div>
 
             </div>
 
         </div>
 
-        <!-- Recommended Tests -->
 
-        <div class="card">
+
+        <!-- =================================================
+             RECOMMENDED TESTS
+        ================================================== -->
+
+        <div class="card reveal">
 
             <div class="card-header bg-primary text-white">
-                Suggested Medical Tests
+
+                <i class="bi bi-file-medical-fill me-2"></i> Suggested Medical Tests
+
             </div>
 
             <div class="card-body">
 
-                <ul>
+                <ul class="custom-list">
 
-                    <li>Complete Blood Count (CBC)</li>
+                    <li>
 
-                    <li>Platelet Count</li>
+                        <i class="bi bi-check-lg"></i> Complete Blood Count (CBC)
 
-                    <li>Dengue NS1 Test</li>
+                    </li>
 
-                    <li>Blood Pressure Check</li>
+                    <li>
+
+                        <i class="bi bi-check-lg"></i> Platelet Count
+
+                    </li>
+
+                    <li>
+
+                        <i class="bi bi-check-lg"></i> Dengue NS1 Test
+
+                    </li>
+
+                    <li>
+
+                        <i class="bi bi-check-lg"></i> Blood Pressure Check
+
+                    </li>
 
                 </ul>
 
@@ -239,27 +1053,53 @@
 
         </div>
 
-        <!-- Prevention -->
 
-        <div class="card">
+
+        <!-- =================================================
+             PREVENTION
+        ================================================== -->
+
+        <div class="card reveal">
 
             <div class="card-header bg-success text-white">
-                Prevention Tips
+
+                <i class="bi bi-shield-check me-2"></i> Prevention Tips
+
             </div>
 
             <div class="card-body">
 
-                <ul>
+                <ul class="custom-list prevention-list">
 
-                    <li>Drink plenty of water.</li>
+                    <li>
 
-                    <li>Take proper rest.</li>
+                        <i class="bi bi-droplet-fill"></i> Drink plenty of water.
 
-                    <li>Avoid mosquito bites.</li>
+                    </li>
 
-                    <li>Eat healthy food.</li>
+                    <li>
 
-                    <li>Visit your doctor immediately.</li>
+                        <i class="bi bi-moon-stars-fill"></i> Take proper rest.
+
+                    </li>
+
+                    <li>
+
+                        <i class="bi bi-bug-fill"></i> Avoid mosquito bites.
+
+                    </li>
+
+                    <li>
+
+                        <i class="bi bi-apple"></i> Eat healthy food.
+
+                    </li>
+
+                    <li>
+
+                        <i class="bi bi-person-badge-fill"></i> Visit your doctor immediately.
+
+                    </li>
 
                 </ul>
 
@@ -267,35 +1107,46 @@
 
         </div>
 
-        <!-- Buttons -->
 
-        <div class="text-center">
 
-            <button onclick="window.print()" class="btn btn-primary btn-lg">
+        <!-- =================================================
+             BUTTONS
+        ================================================== -->
 
-<i class="bi bi-printer"></i>
+        <div class="action-area text-center reveal">
 
-Print Report
+            <button onclick="window.print()" class="btn btn-primary btn-lg print-btn">
 
-</button>
+                <i class="bi bi-printer-fill me-2"></i>
 
-            <a href="appointment.html" class="btn btn-success btn-lg">
+                Print Report
 
-                <i class="bi bi-calendar-check"></i> Book Appointment
+            </button>
+
+
+            <a href="appointment.html" class="btn btn-success btn-lg appointment-btn">
+
+                <i class="bi bi-calendar-check me-2"></i> Book Appointment
 
             </a>
 
-            <a href="predict.html" class="btn btn-danger btn-lg">
 
-                <i class="bi bi-arrow-repeat"></i> Predict Again
+            <a href="predict.html" class="btn btn-danger btn-lg predict-btn">
+
+                <i class="bi bi-arrow-repeat me-2"></i> Predict Again
 
             </a>
 
         </div>
+
 
     </div>
 
-    <!-- Footer -->
+
+
+    <!-- =====================================================
+         FOOTER
+    ====================================================== -->
 
     <footer class="footer text-center">
 
@@ -331,8 +1182,44 @@ Print Report
 
     </footer>
 
+
+
+    <!-- Bootstrap JS -->
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+
+    <!-- Scroll Animation -->
+
+    <script>
+        const revealElements = document.querySelectorAll(".reveal");
+
+        function revealOnScroll() {
+
+            revealElements.forEach((element) => {
+
+                const windowHeight = window.innerHeight;
+
+                const elementTop =
+                    element.getBoundingClientRect().top;
+
+                if (elementTop < windowHeight - 80) {
+
+                    element.classList.add("show");
+
+                }
+
+            });
+
+        }
+
+        window.addEventListener("scroll", revealOnScroll);
+
+        window.addEventListener("load", revealOnScroll);
+    </script>
+
 
 </body>
 
 </html>
+```
